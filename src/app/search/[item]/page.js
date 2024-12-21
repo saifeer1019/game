@@ -12,7 +12,7 @@ export default function SearchPage() {
 <div className="flex flex-col items-start justify-center mt-14">
 <div className='mx-10'>
 
-         <h1 className="text-white text-4xl font-bold mt-10"> Search Results for: &apostest&apos</h1>
+         <h1 className="text-white text-4xl font-bold mt-10"> Search Results for: test</h1>
 
             <Filter />
             <div className="mt-4 self-start">
