@@ -36,7 +36,7 @@ export default function Navbar() {
           </Link>
           <div className="hidden md:flex space-x-4 text-lg  text-gray-100">
             <Link href="/" className="hover:text-gray-300">Home</Link>
-            <Link href="/tv-shows" className="hover:text-gray-300">categories</Link>
+            <Link href="/tv-shows" className="hover:text-gray-300">Categories</Link>
             <Link href="/movies" className="hover:text-gray-300">Games</Link>
             <Link href="/new" className="hover:text-gray-300">New & Popular</Link>
             <Link href="/my-list" className="hover:text-gray-300">My List</Link>
