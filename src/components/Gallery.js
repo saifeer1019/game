@@ -17,7 +17,7 @@ export default function Gallery() {
         //     .then(response => setGames(response.data))
         //     .catch(error => console.error(error));
 
-            console.log(games[0]    );
+            console.log('gfgfd'    );
     }, []);
 
      
