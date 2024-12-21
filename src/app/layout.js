@@ -20,6 +20,7 @@ const orbitron = Orbitron({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-orbitron'
+  
 })
 
 const inter = Inter({

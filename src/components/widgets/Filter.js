@@ -100,11 +100,13 @@ export default function Filter() {
                     onChange={(e) => setSortOrder(e.target.value)} 
                     className="px-3 py-1 rounded bg-white/10 text-white"
                 >
-                    <option value="">Select</option>
-                    <option value="rating">Rating ⭐</option>
-                    <option value="releaseYear">Release Year 📅</option>
+                    <option className="bg-white/10 text-black " value="">Select</option>
+                    <option className="bg-white/10 text-black" value="rating">Rating ⭐</option>
+                    <option className="bg-white/10 text-black" value="releaseYear">Release Year 📅</option>
                 </select>
             </div>
+            
+           
 
             {/* Clear Filters Button */}
     
