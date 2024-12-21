@@ -4,7 +4,7 @@ import "./globals.css";
 import { Bebas_Neue, Orbitron, Inter, Roboto_Condensed } from 'next/font/google'
 
 export const metadata = {
-  title: "Dirty Games",
+  title: "Ddrgf",
   description: "Dirty Games",
 };
 

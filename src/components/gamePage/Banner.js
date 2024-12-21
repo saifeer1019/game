@@ -8,7 +8,7 @@ export default function Banner({ game }) {
      
         <div 
         
-         className="relative min-h-[600px] max-w-7xl mx-auto flex items-center rounded-lg">
+         className="relative min-h-[720px] max-w-[88vw] mx-auto flex items-center rounded-lg">
             {/* Main banner image */}
             <motion.div className="absolute inset-0 rounded-xl mt-24"
             initial={{ opacity: 0 }}
@@ -21,8 +21,8 @@ export default function Banner({ game }) {
                     objectPosition="center"
                 />
                 {/* Gradient overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent rounded-lg" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent rounded-lg" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent rounded-lg" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent rounded-lg" />
             </motion.div>
         
         

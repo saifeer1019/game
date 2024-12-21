@@ -1,21 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .animate-gradient-x {
+    background-size: 400%;
+    animation: gradient-x 15s ease infinite;
+  }
+  
+  @keyframes gradient-x {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-
+@layer base {
+  * {
+    @apply border-border;
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+  }
+  body {
+    @apply bg-background text-foreground;
+    margin: 0; /* Ensure no margin on body */
+    padding: 0; /* Ensure no padding on body */
+  }
 }

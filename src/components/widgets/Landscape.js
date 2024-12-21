@@ -15,7 +15,7 @@ const Landscape = ({
       style={{ 
         width: typeof width === 'number' ? `${width}px` : width, 
         height: typeof height === 'number' ? `${height}px` : height,
-        borderRadius: '10px',
+        borderRadius: '2px',
       }}
      
     >
@@ -27,7 +27,7 @@ const Landscape = ({
           style={{
             objectFit: 'cover',
             objectPosition: objectPosition, // Allows custom focus
-            borderRadius: '10px',
+            borderRadius: '2px',
           }}
           priority={true}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
