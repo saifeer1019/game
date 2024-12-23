@@ -43,7 +43,9 @@ export default function Home() {
 
       <div className="flex flex-col items-start justify-center mt-4 sm:mt-8 md:mt-14">
         <div className="w-full px-4 sm:px-6 md:px-10">
-          <FeaturedContent featuredContent={featuredContent} />
+          <div className="w-full px-4 sm:px-6 md:px-8">
+            <FeaturedContent featuredContent={featuredContent} />
+          </div>
 
           <div className="mt-6 sm:mt-8 md:mt-10 w-full">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 px-4 sm:px-6 md:px-8">
