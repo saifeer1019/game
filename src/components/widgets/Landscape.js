@@ -1,6 +1,6 @@
+// Landscape.js
+"use client"
 import Image from 'next/image';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 
 const Landscape = ({ 
   src, 
@@ -10,33 +10,27 @@ const Landscape = ({
   objectPosition = 'top' 
 }) => {
   return (
-<div
-      className="relative overflow-hidden" 
+    <div
+      className="relative overflow-hidden w-full" 
       style={{ 
-        width: typeof width === 'number' ? `${width}px` : width, 
         height: typeof height === 'number' ? `${height}px` : height,
-        borderRadius: '2px',
+        borderRadius: '8px',
       }}
-     
     >
-    
-        <Image 
-          src={src}
-          alt={alt}
-          fill
-          style={{
-            objectFit: 'cover',
-            objectPosition: objectPosition, // Allows custom focus
-            borderRadius: '2px',
-          }}
-          priority={true}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-      </div>
-  
+      <Image 
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-300 hover:scale-105"
+        style={{
+          objectPosition: objectPosition,
+          borderRadius: '8px',
+        }}
+        priority={true}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+    </div>
   );
 };
 
 export default Landscape;
-
-

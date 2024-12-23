@@ -1,4 +1,4 @@
-'use client'; 
+'use client';
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import Gallery from '@/components/Gallery';
 import FeaturedContent from '@/components/FeaturedContent';
 import Filter from '@/components/widgets/Filter';
 import { Eye } from 'lucide-react';
+
 export default function Home() {
   const [categories] = useState([
     { 
@@ -24,7 +25,6 @@ export default function Home() {
         imageUrl: `/thumbnail-${i + 1}.jpg`
       }))
     },
-    // Add more categories as needed
   ]);
 
   const featuredContent = {
@@ -36,30 +36,32 @@ export default function Home() {
   };
 
   return (
-      <div className="relative min-h-screen flex flex-col justify-start">
-    {/* full page gradient overlay */}
-    <div className="absolute inset-0 bg-[rgb(17,17,17)]" style={{ zIndex: -5 }}></div>
-    <Navbar />
+    <div className="relative min-h-screen flex flex-col justify-start">
+      {/* full page gradient overlay */}
+      <div className="absolute inset-0 bg-[rgb(17,17,17)]" style={{ zIndex: -5 }}></div>
+      <Navbar />
 
-<div className="flex flex-col items-start justify-center mt-14">
-<div className='mx-10'>
-      <FeaturedContent featuredContent={featuredContent} />
+      <div className="flex flex-col items-start justify-center mt-4 sm:mt-8 md:mt-14">
+        <div className="w-full px-4 sm:px-6 md:px-10">
+          <FeaturedContent featuredContent={featuredContent} />
 
-      
- 
-        <div className="mt-10 self-start">
-        <div className='flex my-2'>
-        <h1 className='my-4 text-2xl text-white/80 font-semibold w-fit'>New Games</h1>
-        <button className='border border-cyan-500 h-fit self-center px-2 py-1 text-cyan-500 flex mx-4 gap-x-2 '>
-        <Eye></Eye>
-        View All</button>
+          <div className="mt-6 sm:mt-8 md:mt-10 w-full">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4">
+              <h1 className="text-xl sm:text-2xl text-white/80 font-semibold mb-2 sm:mb-0">
+                New Games
+              </h1>
+              <button className="flex items-center gap-x-2 border border-cyan-500 px-2 py-1 text-cyan-500 text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
+                <Eye className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>View All</span>
+              </button>
+            </div>
+
+            <div className="w-full">
+              <Gallery />
+            </div>
+          </div>
         </div>
-    
-        <Gallery />
-        </div>
-</div>
-
+      </div>
     </div>
-    </div>
-);
-} 
+  );
+}
