@@ -8,7 +8,7 @@ import Gallery from '@/components/Gallery';
 import FeaturedContent from '@/components/FeaturedContent';
 import Filter from '@/components/widgets/Filter';
 import { Eye } from 'lucide-react';
-
+import Footer from '@/components/Footer';
 export default function Home() {
   const [categories] = useState([
     { 
@@ -64,6 +64,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
