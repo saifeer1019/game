@@ -46,7 +46,7 @@ export default function Home() {
           <FeaturedContent featuredContent={featuredContent} />
 
           <div className="mt-6 sm:mt-8 md:mt-10 w-full">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 px-4 sm:px-6 md:px-8">
               <h1 className="text-xl sm:text-2xl text-white/80 font-semibold mb-2 sm:mb-0">
                 New Games
               </h1>

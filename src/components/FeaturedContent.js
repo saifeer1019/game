@@ -6,7 +6,7 @@ const FeaturedContent = ({ featuredContent }) => {
   const router = useRouter();
   
   return (
-    <div className='flex flex-col md:flex-row  md:items-end gap-6 bg-zinc-900/50 mt-8 rounded-xl p-4 md:p-8 w-full'>
+    <div className='flex flex-col md:flex-row  md:items-end gap-6 bg-zinc-900/50 mt-8 rounded-xl p-4 md:p-8 w-full '>
       {/* Image Container */}
       <div className="relative w-full md:w-1/2 h-[300px] md:h-[400px] rounded-lg overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 z-10" />
