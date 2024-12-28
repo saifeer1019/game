@@ -6,26 +6,16 @@ const FeaturedContent = ({ featuredContent }) => {
   const router = useRouter();
   
   return (
-    <div className='flex flex-col md:flex-row  md:items-end gap-6 bg-zinc-900/50 mt-8 rounded-xl p-4 md:p-8 w-full '>
-      {/* Image Container */}
-      <div className="relative w-full md:w-1/2 h-[300px] md:h-[400px] rounded-lg overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 z-10" />
-        <Image
-          src={featuredContent.imageUrl}
-          alt={featuredContent.title}
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+    <div className='flex flex-col md:relative md:overflow-hidden h-[75vh] gap-6 bg-primary_  w-full '>
+     
 
       {/* Content Container */}
-      <div className="w-full md:w-1/2 flex flex-col justify-between">
+      <div className="w-full z-20 md:absolute md:bottom-4 md:left-10 z- md:w-1/2 flex flex-col justify-between">
         <div>
-          <h1 className="text-2xl md:text-4xl font-bold mb-4 text-white/90">
+          <h1 className="text-2xl md:text-4xl font-bold mb-4 text-light_">
             {featuredContent.title}
           </h1>
-          <p className="text-sm md:text-base text-gray-300 mb-4 leading-relaxed">
+          <p className="text-sm md:text-base w-[80%] text-light_ mb-4 leading-relaxed">
             {featuredContent.description}
           </p>
         </div>
@@ -33,7 +23,7 @@ const FeaturedContent = ({ featuredContent }) => {
         <div className="space-y-4">
           {/* Main Button */}
           <button 
-            className="w-full rounded md:w-auto px-6 py-3 bg-cyan-500 text-white/90  
+            className="w-full rounded md:w-auto px-6 py-3 bg-accent_  text-light_  
                      flex items-center justify-center gap-2 hover:bg-cyan-600 transition-colors"
             onClick={() => router.push('/game')}
           >
@@ -45,14 +35,14 @@ const FeaturedContent = ({ featuredContent }) => {
 
           {/* Tags Container */}
           <div className="flex flex-wrap gap-2">
-       <button className="text-xs self-end  px-4 py-1 bg-red-800 text-white/80 rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
+       <button className="text-xs self-end  px-4 py-1 bg-secondary_ text-light_ rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
             router.push(`/game`);
           }}>
       
           {featuredContent.tags[0]}
           </button>
 
-          <button className="text-xs self-end  px-4 py-1 bg-red-800 text-white/80 rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
+          <button className="text-xs self-end  px-4 py-1 bg-secondary_ text-light_ rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
             router.push(`/game`);
           }}>
        
@@ -71,6 +61,46 @@ const FeaturedContent = ({ featuredContent }) => {
           </div>
         </div>
       </div>
+
+
+
+           {/* Image Container */}
+      <div className="absolute right-0 w-full md:w-9/12 h-[300px] md:h-full rounded-lg overflow-hidden z-10">
+      <div 
+      className="absolute inset-0 z-20"
+      style={{
+        background: 'linear-gradient(to right, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 10%, rgba(17, 17, 17, 0.1) 30%, transparent 100%)'
+    }}
+    />
+
+    <div 
+    className="absolute inset-0 z-20"
+    style={{
+      background: 'linear-gradient(to left, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17,0.8) 10%, rgba(36, 36, 40, 0.1) 30%, transparent 100%)'
+    }}
+  />
+
+  <div 
+  className="absolute inset-0 z-20"
+  style={{
+    background: 'linear-gradient(to bottom, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 15%, rgba(17, 17, 17, 0.1) 30%, transparent 100%)'
+  }}
+/>
+
+<div 
+className="absolute inset-0 z-20"
+style={{
+  background: 'linear-gradient(to top, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%, transparent 100%)'
+}}
+/>
+      <Image
+        src={featuredContent.imageUrl}
+        alt={featuredContent.title}
+        fill
+        className="object-cover"
+        priority
+      />
+    </div>
     </div>
   );
 };

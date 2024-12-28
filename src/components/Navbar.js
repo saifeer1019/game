@@ -22,10 +22,13 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed h-20 w-full z-50 transition-colors duration-300 bg-black`}>
+    <nav className={`fixed h-20 w-full z-50 transition-colors duration-300 bg-primary_`}>
       <div className="px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-8">
-          <Link href="/">
+        <Link href="/">
+        <h1 className='text-accent_ font-extrabold text-4xl'>lewd</h1>
+        </Link>
+         { /*<Link href="/">
             <Image
               src="/game.jpg"
               alt="Netflix"
@@ -33,7 +36,7 @@ export default function Navbar() {
               height={24}
               className="cursor-pointer"
             />
-          </Link>
+          </Link>*/}
           <div className="hidden md:flex space-x-4 text-lg  text-gray-100">
             <Link href="/" className="hover:text-gray-300">Home</Link>
             <Link href="/tv-shows" className="hover:text-gray-300">Categories</Link>
@@ -45,12 +48,8 @@ export default function Navbar() {
         <div className="flex items-center space-x-4">
         <SearchBar />
 
-          <button className="text-sm">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
-          <div className="relative group">
+          
+         { /*<div className="relative group">
             <Image
               src="/avatar.png"
               alt="Profile"
@@ -63,7 +62,7 @@ export default function Navbar() {
               <Link href="/account" className="block px-4 py-2 text-sm hover:bg-gray-800">Account</Link>
               <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-800">Sign Out</button>
             </div>
-          </div>
+          </div>*/}
         </div>
       </div>
     </nav>

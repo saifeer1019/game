@@ -18,38 +18,41 @@ export default function Gallery() {
 
   return (
     <div className="w-full px-4 sm:px-6 md:px-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4 md:gap-y-6">
         {games.map(game => (
-          <div key={game.id} className="flex flex-col items-center w-full">
-            <div className="relative w-full aspect-[440/151]">
+          <div key={game.id} className="flex flex-col items-center w-full ">
+            <div className="relative w-full aspect-[4/2]">
               <PortraitImageCrop 
                 src={game.imageUrl} 
                 alt={game.gameName} 
                 width='100%' 
-                height={151} 
+                height='100%'
               />
-              <div className="absolute top-0 left-2 flex flex-wrap mt-2 items-center gap-2 z-20">
+              <div className="absolute bottom-[0] flex flex-wrap m-2 items-center w-[90%]  justify-start gap-2 z-20">
                 {game.data.prefix.map((prefix, index) => (
+                
                   <p 
                     key={index} 
-                    className="bg-lime-600 text-gray-100 roboto-condensed text-xs sm:text-sm font-semibold pb-[1px] px-2 rounded"
+                    className="bg-[#d92365] text-light_ shadow-xl shadow-secondary_ roboto-condensed text-xs sm:text-xs font-semibold px-2 pb-[2px] rounded"
                   >
+                  
                     {prefix}
                   </p>
+                
                 ))}
-                <p className="text-gray-900 roboto-condensed font-semibold bg-gray-100 px-2 pb-[1px] text-xs sm:text-sm rounded">
+                <p className="text-light_ roboto-condensed shadow-xl shadow-secondary_ font-semibold bg-[#d92365] px-2 pb-[2px] text-xs sm:text-xs rounded">
                   {game.data.version}
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-col w-full bg-[#1c1c1f] p-3 sm:p-4">
-              <h2 className="bebas text-gray-100 text-lg sm:text-xl font-semibold truncate">
+            <div className="flex flex-col w-full bg-primary_ shadow-sm p-2">
+              <h2 className="bebas text-light_ text-lg sm:text-lg font-bold tracking-wide mt-1 truncate">
                 {game.data.gameName}
               </h2>
 
-              <div className="flex flex-row justify-between gap-x-2 w-full mt-2">
-                <div className="flex flex-row gap-x-2 text-xs sm:text-sm text-white/50">
+              <div className="flex flex-row text-xs sm:text-xs justify-between  gap-x-4 w-full ">
+                <div className="flex flex-row gap-x-4  text-muted_">
                   <div className="flex flex-row items-center">
                     <Eye className="w-3 h-3 mr-[2px]" />
                     <p className="orbitron">{game.data.ratingCount} Views</p>
@@ -60,7 +63,7 @@ export default function Gallery() {
                     <p className="orbitron">{game.data.developerLinks.length} Links</p>
                   </div>
 
-                  <div className="flex flex-row items-center">
+                  <div className="flex flex-row items-center text-accent-300">
                     <Star className="w-3 h-3 mr-[2px]" />
                     <p className="orbitron">{game.data.rating}</p>
                   </div>

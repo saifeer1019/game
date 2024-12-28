@@ -30,7 +30,7 @@ export default function Home() {
   const featuredContent = {
     title: "Heartstrings",
     description: "A young man moves into a new apartment, discovering a summoning circle and making a deal with a Demoness, gaining new physical...tools and abilities, in exchange for possibly losing his immortal soul!",
-    imageUrl: "https://lewdflix.com/wp-content/uploads/2024/06/AcquaintedBackdrop-1800x715.webp",
+    imageUrl: "https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg",
     type: "series",
     tags: ['VN', 'Adult']
   };
@@ -38,12 +38,12 @@ export default function Home() {
   return (
     <div className="relative min-h-screen flex flex-col justify-start">
       {/* full page gradient overlay */}
-      <div className="absolute inset-0 bg-[rgb(17,17,17)]" style={{ zIndex: -5 }}></div>
+      <div className="absolute inset-0 bg-primary_" style={{ zIndex: -5 }}></div>
       <Navbar />
 
       <div className="flex flex-col items-start justify-center mt-4 sm:mt-8 md:mt-14">
-        <div className="w-full px-4 sm:px-6 md:px-10">
-          <div className="w-full px-4 sm:px-6 md:px-8">
+        <div className="w-full px-4 sm:px-6 md:px-0">
+          <div className="w-full px-4 sm:px-0">
             <FeaturedContent featuredContent={featuredContent} />
           </div>
 
@@ -52,8 +52,8 @@ export default function Home() {
               <h1 className="text-xl sm:text-2xl text-white/80 font-semibold mb-2 sm:mb-0">
                 New Games
               </h1>
-              <button className="flex items-center gap-x-2 border border-cyan-500 px-2 py-1 text-cyan-500 text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
-                <Eye className="w-4 h-4 sm:w-5 sm:h-5" />
+              <button className="flex items-center gap-x-1 border border-light_ px-2 py-1 text-light_ text-sm sm:text-sm hover:bg-cyan-500/10 transition-colors">
+                <Eye className="w-4 h-4 sm:w-4 sm:h-4" />
                 <span>View All</span>
               </button>
             </div>

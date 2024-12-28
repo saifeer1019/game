@@ -1,5 +1,5 @@
 export     const dummyGames = [
-    {  imageUrl: 'https://f.woowoowoowoo.net/resize/250x400/99/7f/997fdcdc8228bddd182c663a7e16f590/997fdcdc8228bddd182c663a7e16f590.jpg',   "id": "97458",
+    {  imageUrl: 'https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg',   "id": "97458",
 "status": "done",
 "data": {
 "uID": "97458",
