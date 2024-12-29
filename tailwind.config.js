@@ -13,7 +13,8 @@ module.exports = {
   		colors: {
 			primary_: '#111111', // Deep black for a gaming dark theme
 			secondary_: '#161618', // Slightly lighter dark gray for sections or containers
-			accent_: '#d92365', // Bright orange-red for call-to-action buttons or highlights
+			accent_: '#d92365',
+			hover_: '#b01d52',  // Bright orange-red for call-to-action buttons or highlights
 			light_: '#e4e4e7', // Soft off-white for text
 			muted_: '#7c7f87', // Muted gray for secondary text
   			primary: {

@@ -27,15 +27,15 @@ export default function Filter() {
     }
 
     return (
-        <div className="py-4 flex justify-start  gap-x-4 items-center rounded-lg mt-4 w-full">
+        <div className="py-4 flex flex-wrap  justify-start  gap-4 items-center rounded-lg mt-4 mb-10">
        
             
             {/* Operating System Filter */}
-            <div className="flex justify-around items-center gap-x-8">
+        
           
             <div className="">
                 <Label className="text-white mb-2 block">Operating System</Label>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap md:flex-nowrap  gap-2">
                     {operatingSystems.map(os => (
                         <button
                             key={os}
@@ -55,7 +55,7 @@ export default function Filter() {
             {/* Rating Filter */}
             <div className="">
                 <Label className="text-white mb-2 block">Minimum Rating</Label>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap md:flex-nowrap gap-2">
                     {ratings.map(rating => (
                         <button
                             key={rating}
@@ -75,12 +75,12 @@ export default function Filter() {
             {/* Category Filter */}
             <div className="">
                 <Label className="text-white mb-2 block">Category</Label>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap md:flex-nowrap gap-2">
                     {categories.map(category => (
                         <button
                             key={category}
                             onClick={() => handleFilterChange('category', category)}
-                            className={`px-3 py-1 rounded ${
+                            className={`whitespace-nowrap overflow-hidden  px-3 py-1 rounded ${
                                 filters.category === category 
                                     ? 'bg-white text-black' 
                                     : 'bg-white/10 text-white'
@@ -110,7 +110,7 @@ export default function Filter() {
 
             {/* Clear Filters Button */}
     
-            </div>
+        
 
             <button
             onClick={() => setFilters({
@@ -120,7 +120,7 @@ export default function Filter() {
                 developer: '',
                 category: ''
             })}
-            className=" px-3 py-1 rounded  bg-red-600 text-white   hover:bg-red-700 self-end"
+            className="whitespace-nowrap overflow-hidden   px-3 py-1 rounded  bg-accent_ text-light_   hover:bg-hover_ "
         >
             Clear Filters
         </button>

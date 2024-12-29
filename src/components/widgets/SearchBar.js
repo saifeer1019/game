@@ -8,7 +8,7 @@ export default function SearchBar() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.push(`/search/${search}`)
+        router.push(`/search?query=${search}`)
         
         console.log(search);
     }
@@ -27,7 +27,7 @@ const handleChange = (e) => {
         </svg>
     </div>
     <input value={search} onChange={handleChange} type="search" id="default-search" className=" w-full p-2 text-sm text-gray-900 " placeholder="Search..." required />
-    <button onClick={handleSubmit} className="text-white bg-accent_ hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    <button onClick={handleSubmit} className="text-white bg-accent_ hover:bg-hover_ focus:ring-4 focus:outline-none focus:ring-hover_ font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
 
 </form>
 

@@ -24,7 +24,7 @@ const FeaturedContent = ({ featuredContent }) => {
           {/* Main Button */}
           <button 
             className="w-full rounded md:w-auto px-6 py-3 bg-accent_  text-light_  
-                     flex items-center justify-center gap-2 hover:bg-cyan-600 transition-colors"
+                     flex items-center justify-center gap-2 hover:bg-hover_ transition-colors"
             onClick={() => router.push('/game')}
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
