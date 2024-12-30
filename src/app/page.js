@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import ContentRow from '@/components/ContentRow';
 import Gallery from '@/components/Gallery';
 import FeaturedContent from '@/components/FeaturedContent';
+import Carousel from '@/components/gamePage/Carousel';
 import Filter from '@/components/widgets/Filter';
 import { Eye } from 'lucide-react';
 import Footer from '@/components/Footer';
@@ -27,13 +28,29 @@ export default function Home() {
     },
   ]);
 
-  const featuredContent = {
+  const featuredContent = [{
     title: "Heartstrings",
     description: "A young man moves into a new apartment, discovering a summoning circle and making a deal with a Demoness, gaining new physical...tools and abilities, in exchange for possibly losing his immortal soul!",
     imageUrl: "https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg",
     type: "series",
     tags: ['VN', 'Adult']
-  };
+  },
+  {
+    title: "Heartstrings",
+    description: "A young man moves into a new apartment, discovering a summoning circle and making a deal with a Demoness, gaining new physical...tools and abilities, in exchange for possibly losing his immortal soul!",
+    imageUrl: "https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg",
+    type: "series",
+    tags: ['VN', 'Adult']
+  },
+  {
+    title: "Heartstrings",
+    description: "A young man moves into a new apartment, discovering a summoning circle and making a deal with a Demoness, gaining new physical...tools and abilities, in exchange for possibly losing his immortal soul!",
+    imageUrl: "https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg",
+    type: "series",
+    tags: ['VN', 'Adult']
+  },
+
+]
 
   return (
     <div className="relative min-h-screen flex flex-col justify-start">
@@ -42,9 +59,9 @@ export default function Home() {
       <Navbar />
 
       <div className="flex flex-col items-start justify-center mt-4 sm:mt-8 md:mt-14">
-        <div className="w-full px-4 sm:px-6 md:px-0">
+        <div className="w-full px-4 sm:px-0 md:px-0">
           <div className="w-full px-4 sm:px-0">
-            <FeaturedContent featuredContent={featuredContent} />
+            <Carousel />
           </div>
 
           <div className="mt-6 sm:mt-8 md:mt-14 w-full">

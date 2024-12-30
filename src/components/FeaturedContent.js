@@ -1,15 +1,52 @@
 import Image from 'next/image';
+import{ useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { MessageCircle, View, Eye } from 'lucide-react';
 
-const FeaturedContent = ({ featuredContent }) => {
+const FeaturedContent = ({ slides }) => {
   const router = useRouter();
-  
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+    const handleNext = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
+  };
+
   return (
     <div className='flex flex-col md:relative md:overflow-hidden h-[75vh] gap-6 bg-primary_  w-full '>
-     
+
+    <AnimatePresence>
+    {slides.map((featuredContent, index) => (
+      index === currentSlide && (
+    <motion.div
+    key={index}
+    initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: "0%" }}
+              exit={{ opacity: 0, x: "-100%" }}
+    transition={{ duration: 0.5 }}
+    className='flex flex-col md:relative md:overflow-hidden h-[75vh] gap-6 bg-primary_  w-full'>
+    
+  
+    <button
+    className="hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/20 p-3 rounded-full text-white z-30"
+    onClick={handlePrev}
+  >
+    &#8249;
+  </button>
+  <button
+    className="hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/20 p-3 rounded-full text-white z-40"
+    onClick={handleNext}
+  >
+  &#8250;
+  </button>
 
       {/* Content Container */}
+
+   
       <div className="w-full z-20 md:absolute md:bottom-4 md:left-10 z- md:w-1/2 flex flex-col justify-between">
         <div>
           <h1 className="text-2xl md:text-4xl font-bold mb-4 text-light_">
@@ -101,6 +138,10 @@ style={{
         priority
       />
     </div>
+    </motion.div>
+  )
+))}
+</AnimatePresence>
     </div>
   );
 };

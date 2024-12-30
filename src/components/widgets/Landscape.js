@@ -14,7 +14,7 @@ const Landscape = ({
       className="relative overflow-hidden w-full" 
       style={{ 
         height: typeof height === 'number' ? `${height}px` : height,
-        borderRadius: '8px',
+  
       }}
     >
       <Image 
@@ -24,7 +24,7 @@ const Landscape = ({
         className="object-cover transition-transform duration-300 hover:scale-105"
         style={{
           objectPosition: objectPosition,
-          borderRadius: '8px',
+ 
         }}
         priority={true}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
