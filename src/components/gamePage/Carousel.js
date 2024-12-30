@@ -139,7 +139,7 @@ const Carousel = () => {
           <div 
           className="absolute inset-0 z-20"
           style={{
-            background: 'linear-gradient(to bottom, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 15%, rgba(17, 17, 17, 0.1) 30%, transparent 100%)'
+            background: 'linear-gradient(to bottom, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 10%, rgba(17, 17, 17, 0.4) 25%, rgba(17, 17, 17, 0.1) 35%, transparent 100%)'
           }}
         />
         
