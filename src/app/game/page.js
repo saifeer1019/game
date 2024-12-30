@@ -5,6 +5,7 @@
 import Banner from "@/components/gamePage/Banner";
 import { dummyGames } from "@/components/DummyGames";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Landscape from "@/components/widgets/Landscape";
@@ -22,12 +23,12 @@ export default function GamePage() {
             <Navbar />
             
             <motion.div 
-                className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 z-20"
+                className="px-4 sm:px-6 lg:px-8 py-6  z-20"
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
             >
-                <div className="mt-4 sm:mt-8 lg:mt-14 flex flex-col lg:flex-row gap-6">
+                <div className="mt-4 sm:mt-8 lg:mt-14 flex flex-col lg:flex-row gap-4">
                     {/* Game Card */}
                     <div className="w-full lg:w-[50%] flex flex-col items-start shadow-lg bg-secondary_ rounded-lg p-4">
                         <div className="w-full mb-4">
@@ -42,10 +43,10 @@ export default function GamePage() {
                         </h1>
                         
                         <div className="flex flex-wrap gap-2 mb-4">
-                            <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                            <span className="bg-white/20 px-3 py-1 rounded text-white transition">
                                 {game.data?.genre[0]}
                             </span>
-                            <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
+                            <span className="bg-white/20 px-3 py-1 rounded text-white">
                                 {game.data?.releaseDate}
                             </span>
                         </div>
@@ -116,7 +117,7 @@ export default function GamePage() {
                         </div>
 
                         {activeTab === 'overview' && (
-                            <div className="flex flex-col gap-4 bg-secondary_ rounded-lg p-4 sm:p-4 text-white mt-4">
+                            <div className="flex flex-col gap-4 bg-secondary_ rounded-lg p-4 sm:p-4 text-white ">
                                 <h3 className="text-lg sm:text-xl font-semibold">Developer Information</h3>
                                 <div className="flex flex-wrap gap-3">
                                     {game.data?.developerLinks?.map((link, index) => (
@@ -174,6 +175,7 @@ export default function GamePage() {
                     </div>
                 </div>
             </motion.div>
+            <Footer />
         </div>
     );
 }
