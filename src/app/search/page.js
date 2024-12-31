@@ -1,10 +1,10 @@
-'use client';
+'use client'
 import { useSearchParams } from 'next/navigation';
 import SearchBar from "@/components/widgets/SearchBar";
 import Navbar from "@/components/Navbar";
 import Filter from "@/components/widgets/Filter";
 import Gallery from "@/components/Gallery"; 
-export default function SearchPage({ params }) {
+export default function SearchPage() {
 
     const searchParams = useSearchParams();
     const query = searchParams.get('query');  // if your URL is like ?query=something

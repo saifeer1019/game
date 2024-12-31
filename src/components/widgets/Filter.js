@@ -27,7 +27,7 @@ export default function Filter() {
     }
 
     return (
-        <div className="py-4 flex flex-wrap  justify-start  gap-4 items-center rounded-lg mt-4 mb-10">
+        <div className="py-4  w-full  self-start justify-self-start flex flex-wrap  justify-start  gap-x-8 gap-y-6 items-center  mt-4 mb-6 ">
        
             
             {/* Operating System Filter */}
@@ -52,26 +52,7 @@ export default function Filter() {
                 </div>
             </div>
 
-            {/* Rating Filter */}
-            <div className="">
-                <Label className="text-white mb-2 block">Minimum Rating</Label>
-                <div className="flex flex-wrap md:flex-nowrap gap-2">
-                    {ratings.map(rating => (
-                        <button
-                            key={rating}
-                            onClick={() => handleFilterChange('rating', rating)}
-                            className={`px-3 py-1 rounded ${
-                                filters.rating === rating 
-                                    ? 'bg-white text-black' 
-                                    : 'bg-white/10 text-white'
-                            }`}
-                        >
-                            {rating}★
-                        </button>
-                    ))}
-                </div>
-            </div>
-
+            
             {/* Category Filter */}
             <div className="">
                 <Label className="text-white mb-2 block">Category</Label>
@@ -91,6 +72,23 @@ export default function Filter() {
                     ))}
                 </div>
             </div>
+
+            {/* Rating Filter */}
+   
+            <div className="">
+            <Label className="text-white mb-2 block">Rating</Label>
+            <select 
+                value={sortOrder} 
+                onChange={(e) => setSortOrder(e.target.value)} 
+                className="px-3 py-1 rounded bg-white/10 text-white"
+            >
+                <option className="bg-white/10 text-black " value="">Select</option>
+                {ratings.map(rating => (
+                <option className="bg-white/10 text-black" value={rating}>   {rating} ⭐</option>
+            ))}
+            </select>
+        </div>
+
 
             {/* Sort Order Filter */}
             <div className="">
@@ -112,18 +110,22 @@ export default function Filter() {
     
         
 
-            <button
-            onClick={() => setFilters({
-                operatingSystem: '',
-                releaseYear: '',
-                rating: '',
-                developer: '',
-                category: ''
-            })}
-            className="whitespace-nowrap overflow-hidden   px-3 py-1 rounded  bg-accent_ text-light_   hover:bg-hover_ "
-        >
-            Clear Filters
-        </button>
+        
+
+        <button
+        onClick={() => setFilters({
+            operatingSystem: '',
+            releaseYear: '',
+            rating: '',
+            developer: '',
+            category: ''
+        })}
+        className="whitespace-nowrap overflow-hidden self-end   px-3 py-1 rounded  bg-accent_ text-light_   hover:bg-hover_ "
+    >
+        Apply Filters
+    </button>
+
+
         </div>
     )
 }
