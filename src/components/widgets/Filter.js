@@ -84,7 +84,7 @@ export default function Filter() {
             >
                 <option className="bg-white/10 text-black " value="">Select</option>
                 {ratings.map(rating => (
-                <option className="bg-white/10 text-black" value={rating}>   {rating} ⭐</option>
+                <option key={rating} className="bg-white/10 text-black" value={rating}>   {rating} ⭐</option>
             ))}
             </select>
         </div>
