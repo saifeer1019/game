@@ -1,14 +1,15 @@
-'use client'
-import { useSearchParams } from 'next/navigation';
+'use client';
+
+import { useRouter } from 'next/router';
 import SearchBar from "@/components/widgets/SearchBar";
 import Navbar from "@/components/Navbar";
 import Filter from "@/components/widgets/Filter";
-import Gallery from "@/components/Gallery"; 
-export default function SearchPage() {
+import Gallery from "@/components/Gallery";
 
-    const searchParams = useSearchParams();
-    const query = searchParams.get('query');  // if your URL is like ?query=something
-  
+export default function SearchPage() {
+    const router = useRouter();
+    const { query } = router; // Extract query from the router object
+
     return (
         <div className="relative min-h-screen flex flex-col justify-start ">
         {/* full page gradient overlay */}
