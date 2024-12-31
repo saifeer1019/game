@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import SearchBar from "@/components/widgets/SearchBar";
 import Navbar from "@/components/Navbar";
 import Filter from "@/components/widgets/Filter";
