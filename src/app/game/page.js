@@ -64,7 +64,8 @@ export default function GamePage() {
                 className="absolute inset-0 z-10 object-cover"
             />
         </div>
-                <div className="  border border-muted_ p-4 sm:p-6 mx-6 rounded-[10px] shadow-xl flex flex-col lg:flex-row gap-4">
+             <div className="  border border-muted_ p-4 sm:p-6 mx-6 rounded-[10px] shadow-xl flex flex-col gap-4">
+                <div className="  flex flex-col lg:flex-row gap-4">
                     {/* Game Card */}
                     <div className="w-full lg:w-[50%] flex flex-col items-start shadow-lg bg-primary_ rounded-lg ">
                        
@@ -279,26 +280,26 @@ export default function GamePage() {
                     </div>
 
 
-                    <div className="mt-6 p-4">
-                    <h2 className="text-xl sm:text-2xl text-white font-bold mb-4">Screenshots</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {game.data?.images?.slice(0, 8).map((image, index) => (
-                            <div key={index} className="relative aspect-video rounded-lg overflow-hidden">
-                                <Image
-                                    src={image.url}
-                                    alt={image.alt}
-                                    fill
-                                    className="object-cover hover:scale-110 transition duration-300"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-
                         
                 </div>
 
+
+                 <div className="mt-6 p-4">
+                            <h2 className="text-xl sm:text-2xl text-white font-bold mb-4">Screenshots</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {game.data?.images?.slice(0, 8).map((image, index) => (
+                                    <div key={index} className="relative aspect-video rounded-lg overflow-hidden">
+                                        <Image
+                                            src={image.url}
+                                            alt={image.alt}
+                                            fill
+                                            className="object-cover hover:scale-110 transition duration-300"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                </div>
                 <div className="flex flex-col gap-8">
                 <h1 className="text-xl sm:text-2xl text-white/80 font-semibold my-2 sm:mb-0 mx-8">More games like this</h1>
                         <Gallery slice={4} heading={"Related Games"} gap={4} />
