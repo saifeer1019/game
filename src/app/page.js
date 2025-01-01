@@ -5,11 +5,13 @@ import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import ContentRow from '@/components/ContentRow';
 import Gallery from '@/components/Gallery';
+import GalleryPills from '@/components/GalleryPills';
 import FeaturedContent from '@/components/FeaturedContent';
 import Carousel from '@/components/gamePage/Carousel';
 import Filter from '@/components/widgets/Filter';
-import { Eye } from 'lucide-react';
+import { Eye, ChevronRight } from 'lucide-react';
 import Footer from '@/components/Footer';
+import { SwipeCarousel } from '@/components/widgets/Carousel';
 export default function Home() {
   const [categories] = useState([
     { 
@@ -67,11 +69,120 @@ export default function Home() {
           <div className="mt-6 sm:mt-8 md:mt-14 w-full">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 md:mb-6 px-4 sm:px-6 md:px-8">
               <h1 className="text-xl sm:text-2xl text-white/80 font-semibold mb-2 sm:mb-0">
-                New Games
+                Trending Right Now
               </h1>
               <button className="flex items-center gap-x-1 border border-light_ px-2 py-1 text-light_ text-sm sm:text-sm hover:bg-cyan-500/10 transition-colors">
                 <Eye className="w-4 h-4 sm:w-4 sm:h-4" />
                 <span>View All</span>
+              </button>
+            </div>
+
+            <div className="w-full">
+              <Gallery />
+            </div>
+          </div>
+
+      
+          <div className="mt-6 sm:mt-8 md:mt-14 w-full ">
+          
+
+            <div className="grid md:mx-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4 md:gap-y-6">
+
+          {/*trending */}
+            <div className='flex flex-col '>
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between  ">
+                <h1 className="text-xl sm:text-xl text-white/80 font-semibold mb-2 sm:mb-4">
+                Category 1
+                </h1>
+            
+              </div>
+            <GalleryPills />
+
+            <button className="flex items-center w-fit tracking-wide mt-2 gap-x-1  py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
+            
+            <span>View more</span>
+            <ChevronRight className="self-center w-4 h-4 sm:w-4 sm:h-4" />
+          </button>
+         
+            </div>
+
+            
+          {/*trending */}
+          <div className='flex flex-col '>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between  ">
+          <h1 className="text-xl sm:text-xl text-white/80 font-semibold mb-2 sm:mb-4">
+          Category 2
+          </h1>
+      
+        </div>
+      <GalleryPills />
+
+      <button className="flex items-center w-fit tracking-wide mt-2 gap-x-1  py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
+      
+      <span>View more</span>
+      <ChevronRight className="self-center w-4 h-4 sm:w-4 sm:h-4" />
+    </button>
+   
+      </div>
+
+      
+          {/*trending */}
+          <div className='flex flex-col '>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between  ">
+          <h1 className="text-xl sm:text-xl text-white/80 font-semibold mb-2 sm:mb-4">
+          Category 3
+          </h1>
+      
+        </div>
+      <GalleryPills />
+
+      <button className="flex items-center w-fit tracking-wide mt-2 gap-x-1  py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
+      
+      <span>View more</span>
+      <ChevronRight className="self-center w-4 h-4 sm:w-4 sm:h-4" />
+    </button>
+   
+      </div>
+
+      
+          {/*trending */}
+          <div className='flex flex-col '>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between  ">
+          <h1 className="text-xl sm:text-xl text-white/80 font-semibold mb-2 sm:mb-4">
+          Category 4
+          </h1>
+      
+        </div>
+      <GalleryPills />
+
+      <button className="flex items-center w-fit tracking-wide mt-2 gap-x-1  py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
+      
+      <span>View more</span>
+      <ChevronRight className="self-center w-4 h-4 sm:w-4 sm:h-4" />
+    </button>
+   
+      </div>
+
+         
+          
+          
+          </div>
+          </div>
+
+          
+          <div className="mt-6 sm:mt-8 md:mt-14 w-full">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 md:mb-6 px-4 sm:px-6 md:px-8">
+              <h1 className="text-xl sm:text-2xl text-white/80 font-semibold mb-2 sm:mb-0">
+                Popular
+              </h1>
+              <button className="flex items-center gap-x-1 border border-light_ px-2 py-1 text-light_ text-sm sm:text-sm hover:bg-cyan-500/10 transition-colors">
+                <Eye className="w-4 h-4 sm:w-4 sm:h-4" />
+                <span>View All</span>
+             
               </button>
             </div>
 

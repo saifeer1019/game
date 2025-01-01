@@ -7,7 +7,7 @@ import { dummyGames } from './DummyGames';
 import { Link, Eye, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function Gallery() {
+export default function Gallery({slice = 8, heading}) {
   const [games, setGames] = useState(dummyGames);
 
   useEffect(() => {
@@ -20,10 +20,10 @@ export default function Gallery() {
   return (
     <div className="w-full px-4 sm:px-6 md:px-8 md:mb-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4 md:gap-y-6">
-        {games.map((game) => (
+        {games.slice(0, slice).map((game) => (
           <motion.div
             key={game.id}
-            className="flex flex-col items-center w-full"
+            className="flex flex-col items-center w-full cursor-pointer"
             whileHover={{
               scale: 1.05,
               transition: { duration: 0.2 },
