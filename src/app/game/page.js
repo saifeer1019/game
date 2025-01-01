@@ -284,9 +284,9 @@ export default function GamePage() {
                 </div>
 
 
-                 <div className="mt-6 p-4">
+                 <div className="mt-6 ">
                             <h2 className="text-xl sm:text-2xl text-white font-bold mb-4">Screenshots</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {game.data?.images?.slice(0, 8).map((image, index) => (
                                     <div key={index} className="relative aspect-video rounded-lg overflow-hidden">
                                         <Image
@@ -300,9 +300,17 @@ export default function GamePage() {
                             </div>
                         </div>
                 </div>
+
+                <div className="bg-light_ w-[80vw] h-[20vh] self-center my-4 text-center text-4xl">
+                Ad
+                </div>
                 <div className="flex flex-col gap-8">
-                <h1 className="text-xl sm:text-2xl text-white/80 font-semibold my-2 sm:mb-0 mx-8">More games like this</h1>
+                <h1 className="text-xl sm:text-2xl text-white/80 font-semibold mt-8 sm:mb-0 mx-8">More games like this</h1>
                         <Gallery slice={4} heading={"Related Games"} gap={4} />
+                        </div>
+
+                        <div className="bg-light_ w-[80vw] h-[20vh] self-center my-4 text-center text-4xl">
+                        Ad
                         </div>
             </motion.div>
             <Footer />
