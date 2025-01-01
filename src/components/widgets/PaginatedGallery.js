@@ -2,13 +2,26 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import PortraitImageCrop from './widgets/Portrait';
-import { dummyGames } from './DummyGames';
+import PortraitImageCrop from './Portrait';
+import { dummyGames } from '../DummyGames';
 import { Link, Eye, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Pagination from './Pagination';
 
-export default function Gallery({slice = 8, heading}) {
+export default function Gallery({ heading }) {
   const [games, setGames] = useState(dummyGames);
+  const [currentPage, setCurrentPage] = useState(1);
+  const gamesPerPage = 10;
+
+  const totalPages = Math.ceil(games.length / gamesPerPage);
+  const indexOfLastGame = currentPage * gamesPerPage;
+  const indexOfFirstGame = indexOfLastGame - gamesPerPage;
+  const currentGames = games.slice(indexOfFirstGame, indexOfLastGame);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     // axios.get('http://localhost:3000/api/games')
@@ -18,9 +31,9 @@ export default function Gallery({slice = 8, heading}) {
   }, []);
 
   return (
-    <div className="w-full  sm:px-6 md:px-8 md:mb-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4 md:gap-y-6">
-        {games.slice(0, slice).map((game) => (
+    <div className="w-full  md:mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 md:gap-y-6">
+        {currentGames.map((game) => (
           <motion.div
             key={game.id}
             className="flex flex-col items-center w-full cursor-pointer"
@@ -50,24 +63,20 @@ export default function Gallery({slice = 8, heading}) {
                 </p>
               </div>
             </div>
-
-            <div className="flex flex-col w-full bg-primary_ shadow-sm p-2">
-              <h2 className="bebas text-light_ text-lg sm:text-lg font-bold tracking-wide mt-1 truncate">
+            <div className="flex flex-col w-full bg-primary_ shadow-sm py-2">
+              <h2 className="bebas text-light_ text-lg sm:text-xl font-bold tracking-wide mt-1 truncate">
                 {game.data.gameName}
               </h2>
-
-              <div className="flex flex-row text-xs sm:text-xs justify-between gap-x-4 w-full">
+              <div className="flex flex-row text-xs sm:text-sm justify-between gap-x-4 w-full">
                 <div className="flex flex-row gap-x-4 text-muted_">
                   <div className="flex flex-row items-center">
                     <Eye className="w-3 h-3 mr-[2px]" />
                     <p className="orbitron">{game.data.ratingCount} Views</p>
                   </div>
-
                   <div className="flex flex-row items-center">
                     <Link className="w-3 h-3 mr-[2px]" />
                     <p className="orbitron">{game.data.developerLinks.length} Links</p>
                   </div>
-
                   <div className="flex flex-row items-center text-accent-300">
                     <Star className="w-3 h-3 mr-[2px]" />
                     <p className="orbitron">{game.data.rating}</p>
@@ -78,6 +87,11 @@ export default function Gallery({slice = 8, heading}) {
           </motion.div>
         ))}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

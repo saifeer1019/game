@@ -18,13 +18,13 @@ export default function GalleryPills({jfgn}) {
   }, []);
 
   return (
-    <div className="w-full  mb-10">
+    <div className="w-full mb-4 sm:mb-2">
       <div className="flex flex-col gap-4 md:gap-4 md:gap-y-6">
         {games.slice(0, 4).map((game) => (
         
-          <div className='flex justify-start gap-x-4 hover:bg-cyan-500/10 cursor-pointer border-b-[0.2px] py-2 mr-4  border-b-gray-300'>
+          <div className='flex justify-start gap-x-4 hover:bg-cyan-500/10 cursor-pointer border-b-1 py-2 mr-4  border-b-gray-300'>
               <PortraitImageCrop
-                src='https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg'
+                src={game.imageUrl}
                 alt={game.data.gameName}    
                 width = {50}
                 height = {70}   

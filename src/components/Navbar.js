@@ -1,12 +1,12 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
 import SearchBar from './widgets/SearchBar';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,23 +21,21 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
-    <nav className={`fixed h-20 w-full z-50 transition-colors duration-300 bg-primary_`}>
+    <nav className="fixed h-20 w-full z-50 transition-colors duration-300 bg-primary_">
       <div className="px-4 py-4 flex items-center justify-between">
+        {/* Left side - Logo and Desktop Navigation */}
         <div className="flex items-center space-x-8">
-        <Link href="/">
-        <h1 className='text-accent_ font-extrabold text-4xl'>lewd</h1>
-        </Link>
-         { /*<Link href="/">
-            <Image
-              src="/game.jpg"
-              alt="Netflix"
-              width={92}
-              height={24}
-              className="cursor-pointer"
-            />
-          </Link>*/}
-          <div className="hidden md:flex space-x-4 text-lg  text-gray-100">
+          <Link href="/">
+            <h1 className="text-accent_ font-extrabold text-4xl">lewd</h1>
+          </Link>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-4 text-lg text-gray-100">
             <Link href="/" className="hover:text-gray-300">Home</Link>
             <Link href="/tv-shows" className="hover:text-gray-300">Categories</Link>
             <Link href="/movies" className="hover:text-gray-300">Games</Link>
@@ -45,26 +43,68 @@ export default function Navbar() {
             <Link href="/my-list" className="hover:text-gray-300">My List</Link>
           </div>
         </div>
-        <div className="flex items-center space-x-4">
-        <SearchBar />
 
+        {/* Right side - Search and Mobile Menu Button */}
+        <div className="flex items-center space-x-4">
+          <div className="hidden sm:block">
+            <SearchBar />
+          </div>
           
-         { /*<div className="relative group">
-            <Image
-              src="/avatar.png"
-              alt="Profile"
-              width={32}
-              height={32}
-              className="rounded cursor-pointer"
-            />
-            <div className="absolute right-0 mt-2 w-48 bg-black border border-gray-800 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-800">Profile</Link>
-              <Link href="/account" className="block px-4 py-2 text-sm hover:bg-gray-800">Account</Link>
-              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-800">Sign Out</button>
-            </div>
-          </div>*/}
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={toggleMobileMenu}
+            className="md:hidden text-gray-100 p-2"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed top-20 left-0 right-0 bg-primary_ border-t border-gray-700">
+          <div className="px-4 py-2 sm:hidden">
+            <SearchBar />
+          </div>
+          <div className="flex flex-col space-y-4 px-4 py-4">
+            <Link 
+              href="/" 
+              className="text-gray-100 hover:text-gray-300 text-lg"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link 
+              href="/tv-shows" 
+              className="text-gray-100 hover:text-gray-300 text-lg"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Categories
+            </Link>
+            <Link 
+              href="/movies" 
+              className="text-gray-100 hover:text-gray-300 text-lg"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Games
+            </Link>
+            <Link 
+              href="/new" 
+              className="text-gray-100 hover:text-gray-300 text-lg"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              New & Popular
+            </Link>
+            <Link 
+              href="/my-list" 
+              className="text-gray-100 hover:text-gray-300 text-lg"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              My List
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

@@ -1,7 +1,7 @@
 import SearchBar from "@/components/widgets/SearchBar";
 import Navbar from "@/components/Navbar";
 import Filter from "@/components/widgets/Filter";
-import Gallery from "@/components/Gallery"; 
+import Gallery from "@/components/widgets/PaginatedGallery";
 export default function SearchPage() {
     return (
         <div className="relative min-h-screen flex flex-col justify-start">
