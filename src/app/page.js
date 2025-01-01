@@ -201,6 +201,9 @@ export default function Home() {
             <div className="w-full">
               <Gallery />
             </div>
+            <div className="w-full">
+            <Gallery />
+          </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,5 @@
-
-
 // GamePage.js
-"use client"
+"use client";
 import Banner from "@/components/gamePage/Banner";
 import { dummyGames } from "@/components/DummyGames";
 import Gallery from "@/components/gamePage/Gallery";
@@ -12,66 +10,98 @@ import { useEffect, useState } from "react";
 import Landscape from "@/components/widgets/Landscape";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import {Info, Download} from "lucide-react"
 
 export default function GamePage() {
-    const { id } = useParams();
-    const [game, setGame] = useState(dummyGames[0]);
-    const [activeTab, setActiveTab] = useState('overview');
+  const { id } = useParams();
+  const [game, setGame] = useState(dummyGames[1]);
+  const [activeTab, setActiveTab] = useState("overview");
 
-    return (
-        <div className="relative min-h-screen flex flex-col justify-start">
-            <div className="absolute inset-0 bg-primary_" style={{ zIndex: -5 }}></div>
-            <Navbar />
-            
-            <motion.div 
-                className="relative py-6  z-20 flex flex-col gap-y-4 mt-4 sm:mt-8 lg:mt-14"
-                initial={{ opacity: 0, y: 0 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-            >
-            <div className="relative w-full mb-4">
-                    <div 
-                    className="absolute inset-0 z-20"
-                    style={{
-                    background: 'linear-gradient(to right, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%,  transparent 100%)'
-                }}
-                />
-            
-                <div 
-                className="absolute inset-0 z-20"
-                style={{
-                    background: 'linear-gradient(to left, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%, transparent 100%)'
-                }}
-                />
-            
-                <div 
-                className="absolute inset-0 z-20"
-                style={{
-                background: 'linear-gradient(to bottom, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%, transparent 100%)'
-                }}
-            />
-            
-            <div 
-            className="absolute inset-0 z-20"
-            style={{
-                background: 'linear-gradient(to top, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%, transparent 100%)'
-            }}
-            />
-            <Landscape
-                src={game.data?.bannerURL || game.imageUrl}
-                alt={game.data?.gameName || 'banner'}
-                height={350}
-                className="absolute inset-0 z-10 object-cover"
-            />
-        </div>
-             <div className="  border border-muted_ p-4 sm:p-6 mx-6 rounded-[10px] shadow-xl flex flex-col gap-4">
-                <div className="  flex flex-col lg:flex-row gap-4">
+  return (
+    <div className="relative min-h-screen flex flex-col">
+      {/* Background */}
+      <div className="absolute inset-0 bg-primary_" style={{ zIndex: -5 }}></div>
+
+      {/* Navbar */}
+      <Navbar />
+
+      {/* Main Content */}
+      <motion.div
+        className="relative flex flex-col gap-y-8 px-0 lg:px-8 mt-8 lg:mt-14"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        {/* Banner and Game Card */}
+        <div className="relative flex flex-col">
+          {/* Banner */}
+          <div className="relative w-full mb-4">
+          <div 
+          className="absolute inset-0 z-20"
+          style={{
+          background: 'linear-gradient(to right, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%,  transparent 100%)'
+      }}
+      />
+  
+      <div 
+      className="absolute inset-0 z-20"
+      style={{
+          background: 'linear-gradient(to left, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%, transparent 100%)'
+      }}
+      />
+  
+      <div 
+      className="absolute inset-0 z-20"
+      style={{
+      background: 'linear-gradient(to bottom, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%, transparent 100%)'
+      }}
+  />
+  
+  <div 
+  className="absolute inset-0 z-20"
+  style={{
+      background: 'linear-gradient(to top, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%, transparent 100%)'
+  }}
+  />
+  <Landscape
+      src={game.data?.bannerURL || game.imageUrl}
+      alt={game.data?.gameName || 'banner'}
+      height={350}
+      className="absolute inset-0 z-10 object-cover"
+  />
+</div>
+
+          {/* Game Card */}
+          <div className="relative -mt-24 lg:-mt-12 z-20  p-6 sm:p-8 bg-secondary_ border-t sm:border border-muted_ sm:rounded-[20px] shadow-lg">
+          <div className="  flex flex-col lg:flex-row gap-4">
                     {/* Game Card */}
-                    <div className="w-full lg:w-[50%] flex flex-col items-start shadow-lg bg-primary_ rounded-lg ">
+                    <div className="w-full  flex flex-col items-start shadow-lg bg-secondary_ rounded-lg ">
+                       <div className="w-full flex justify-start gap-8 items-start h-fit">
                        
-                        <h1 className="text-2xl sm:text-3xl lg:text-4xl text-white mb-4 font-roboto font-semibold">
+                       <h1 className="text-2xl w-[40vw] sm:w-fit sm:mb-6 overflow-hidden self-end sm:text-3xl lg:text-4xl text-white mb-4 font-roboto font-semibold">
                             {game.data?.gameName}
                         </h1>
+                                  {/* Main Button */}
+            <button 
+            className="w-full rounded md:w-auto px-4 py-2 sm:rounded-[5px] bg-accent_  text-light_   sm:text-lg
+                     flex items-center justify-center gap-2 hover:bg-hover_ transition-colors"
+            onClick={() => router.push('/game')}
+          >
+            <Download className="w-5 h-5" />
+            Download
+          </button>
+
+          <button 
+          className="w-full hidden  rounded md:w-auto px-4 py-2 bg-gray-500  text-light_   sm:text-lg
+                   sm:flex items-center j sm:rounded-[5px]ustify-center gap-2 hover:bg-gray-800 transition-colors"
+          onClick={() => router.push('/game')}
+        >
+           <Info className="w-5 h-5" />
+          Game Info
+        </button>
+          
+          </div>
+                        
                         
                         <div className="flex flex-wrap gap-2 mb-4">
                             <span className="bg-white/20 px-3 py-1 rounded text-white transition">
@@ -93,7 +123,7 @@ export default function GamePage() {
                             <span>{game.data?.language}</span>
                         </div>
 
-                        <p className="text-gray-300 mb-6 line-clamp-3">
+                        <p className="text-gray-300 sm:text-base mb-6 line-clamp-3">
                             {game.data?.overview}
                         </p>
 
@@ -113,7 +143,7 @@ export default function GamePage() {
                     </div>
 
                     {/* Game Info */}
-                    <div className="w-full lg:w-[65%]  bg-primary_ rounded-lg ">
+                    <div className="w-full lg:w-[65%]  bg-secondary_ rounded-lg ">
                         <div className="flex space-x-4 border-b-[1px] border-white/10 overflow-x-auto">
                             <button 
                                 className={`px-4 py-2 whitespace-nowrap ${
@@ -148,7 +178,7 @@ export default function GamePage() {
                         </div>
 
                         {activeTab === 'overview' && (
-                            <div className="flex flex-col gap-4 bg-primary_ rounded-lg p-4 sm:p-4 text-white ">
+                            <div className="flex flex-col gap-4 bg-secondary_ rounded-lg p-4 sm:p-4 text-white ">
                                 <h3 className="text-lg sm:text-xl font-semibold">Developer Information</h3>
                                 <div className="flex flex-wrap gap-3">
                                     {game.data?.developerLinks?.map((link, index) => (
@@ -192,7 +222,7 @@ export default function GamePage() {
 
                         {/*links*/}
                             {activeTab === 'links' && (
-                            <div className="flex flex-col gap-4 bg-primary_ rounded-lg p-4 sm:p-4 text-white ">
+                            <div className="flex flex-col gap-4 bg-secondary_ rounded-lg p-4 sm:p-4 text-white ">
                                 <h3 className="text-lg sm:text-xl font-semibold">Developer Information</h3>
                                 <div className="flex flex-wrap gap-3">
                                     {game.data?.developerLinks?.map((link, index) => (
@@ -236,7 +266,7 @@ export default function GamePage() {
                         {/*More Info*/}
 
                             {activeTab === 'screenshots' && (
-                            <div className="flex flex-col gap-4 bg-primary_ rounded-lg p-4 sm:p-4 text-white ">
+                            <div className="flex flex-col gap-4 bg-secondary_ rounded-lg p-4 sm:p-4 text-white ">
                                 <h3 className="text-lg sm:text-xl font-semibold">Developer Information</h3>
                                 <div className="flex flex-wrap gap-3">
                                     {game.data?.developerLinks?.map((link, index) => (
@@ -278,13 +308,12 @@ export default function GamePage() {
 
                        
                     </div>
-
+                
 
                         
                 </div>
 
-
-                 <div className="mt-6 ">
+                         <div className="mt-6 ">
                             <h2 className="text-xl sm:text-2xl text-white font-bold mb-4">Screenshots</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {game.data?.images?.slice(0, 8).map((image, index) => (
@@ -299,21 +328,25 @@ export default function GamePage() {
                                 ))}
                             </div>
                         </div>
-                </div>
-
-                <div className="bg-light_ w-[80vw] h-[20vh] self-center my-4 text-center text-4xl">
-                Ad
-                </div>
-                <div className="flex flex-col gap-8">
-                <h1 className="text-xl sm:text-2xl text-white/80 font-semibold mt-8 sm:mb-0 mx-8">More games like this</h1>
-                        <Gallery slice={4} heading={"Related Games"} gap={4} />
-                        </div>
-
-                        <div className="bg-light_ w-[80vw] h-[20vh] self-center my-4 text-center text-4xl">
-                        Ad
-                        </div>
-            </motion.div>
-            <Footer />
+          </div>
         </div>
-    );
+
+        {/* Ads */}
+        <div className="bg-gray-600 w-[80vw] h-[20vh] sm:my-10 mx-auto flex items-center justify-center text-4xl text-white">
+          Ad
+        </div>
+
+        {/* Related Games */}
+        <Gallery slice={4} heading="Related Games" />
+
+        {/* Ads */}
+        <div className="bg-gray-600  sm:my-10 w-[80vw]  h-[20vh] mx-auto flex items-center justify-center text-4xl text-white">
+          Ad
+        </div>
+      </motion.div>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
 }
