@@ -22,7 +22,7 @@ export default function GalleryPills({jfgn}) {
       <div className="flex flex-col gap-4 md:gap-4 md:gap-y-6">
         {games.slice(0, 4).map((game) => (
         
-          <div className='flex justify-start gap-x-4 hover:bg-cyan-500/10 cursor-pointer border-b-1 py-2 mr-4  border-b-gray-300'>
+          <div key={game.imageUrl} className='flex justify-start gap-x-4 hover:bg-cyan-500/10 cursor-pointer border-b-1 py-2 mr-4  border-b-gray-300'>
               <PortraitImageCrop
                 src={game.imageUrl}
                 alt={game.data.gameName}    
