@@ -92,7 +92,7 @@ export default function GamePage() {
           </button>
 
           <button 
-          className="w-full hidden  rounded md:w-auto px-4 py-2 bg-gray-500  text-light_   sm:text-base
+          className="w-full hidden  rounded md:w-auto px-4 py-2 bg-gray-500  text-white   sm:text-base
                    sm:flex items-center j sm:rounded-[5px]ustify-center gap-2 hover:bg-gray-800 transition-colors"
           onClick={() => router.push('/game')}
         >
@@ -337,6 +337,10 @@ export default function GamePage() {
         </div>
 
         {/* Related Games */}
+
+        <h1 className="text-2xl w-[40vw] sm:w-fit sm:mb-6 overflow-hidden self-start sm:mx-6 sm:text-3xl lg:text-3xl text-white mb-4 font-roboto font-semibold">
+       More games like this
+    </h1>
         <Gallery slice={4} heading="Related Games" />
 
         {/* Ads */}
