@@ -66,13 +66,13 @@ export default function GamePage() {
   <Landscape
       src={game.data?.bannerURL || game.imageUrl}
       alt={game.data?.gameName || 'banner'}
-      height={350}
+      height={380}
       className="absolute inset-0 z-10 object-cover"
   />
 </div>
 
           {/* Game Card */}
-          <div className="relative -mt-24 lg:-mt-12 z-20  p-6 sm:p-8 bg-secondary_ border-t sm:border border-muted_ sm:rounded-[20px] shadow-lg">
+          <div className="relative -mt-24 lg:-mt-8 z-20  p-6 sm:p-8 bg-secondary_ border-t sm:border border-muted_ sm:rounded-[20px] shadow-lg">
           <div className="  flex flex-col lg:flex-row gap-4">
                     {/* Game Card */}
                     <div className="w-full  flex flex-col items-start shadow-lg bg-secondary_ rounded-lg ">
