@@ -78,25 +78,25 @@ export default function GamePage() {
                     <div className="w-full  flex flex-col items-start shadow-lg bg-secondary_ rounded-lg ">
                        <div className="w-full flex justify-start gap-8 items-start h-fit">
                        
-                       <h1 className="text-2xl w-[40vw] sm:w-fit sm:mb-6 overflow-hidden self-end sm:text-3xl lg:text-4xl text-white mb-4 font-roboto font-semibold">
+                       <h1 className="text-2xl w-[40vw] sm:w-fit sm:mb-6 overflow-hidden self-end sm:text-3xl lg:text-3xl text-white mb-4 font-roboto font-semibold">
                             {game.data?.gameName}
                         </h1>
                                   {/* Main Button */}
             <button 
-            className="w-full rounded md:w-auto px-4 py-2 sm:rounded-[5px] bg-accent_  text-light_   sm:text-lg
+            className="w-full rounded md:w-auto px-4 py-2 sm:rounded-[5px] bg-accent_  text-light_   sm:text-base
                      flex items-center justify-center gap-2 hover:bg-hover_ transition-colors"
             onClick={() => router.push('/game')}
           >
-            <Download className="w-5 h-5" />
+            <Download className="w-4 h-4" />
             Download
           </button>
 
           <button 
-          className="w-full hidden  rounded md:w-auto px-4 py-2 bg-gray-500  text-light_   sm:text-lg
+          className="w-full hidden  rounded md:w-auto px-4 py-2 bg-gray-500  text-light_   sm:text-base
                    sm:flex items-center j sm:rounded-[5px]ustify-center gap-2 hover:bg-gray-800 transition-colors"
           onClick={() => router.push('/game')}
         >
-           <Info className="w-5 h-5" />
+           <Info className="w-4 h-4"  />
           Game Info
         </button>
           
@@ -104,16 +104,16 @@ export default function GamePage() {
                         
                         
                         <div className="flex flex-wrap gap-2 mb-4">
-                            <span className="bg-white/20 px-3 py-1 rounded text-white transition">
+                            <span className="bg-white/20 px-3 py-1 text-center rounded-[5px] text-white transition">
                                 {game.data?.genre[0]}
                             </span>
-                            <span className="bg-white/20 px-3 py-1 rounded text-white">
+                            <span className="bg-white/20 px-3 py-1 rounded-[5px] text-white">
                                 {game.data?.releaseDate}
                             </span>
                         </div>
 
                         <div className="flex flex-wrap text-white items-center gap-2 sm:gap-4 mb-4">
-                            <span className="bg-white/20 px-3 py-1 rounded">
+                            <span className="bg-white/20 px-3 py-1 rounded-[5px]">
                                 {game.data?.version}
                             </span>
                             <span className="flex items-center gap-1">
@@ -123,7 +123,7 @@ export default function GamePage() {
                             <span>{game.data?.language}</span>
                         </div>
 
-                        <p className="text-gray-300 sm:text-base mb-6 line-clamp-3">
+                        <p className="text-gray-300 sm:text-sm mb-6 line-clamp-3">
                             {game.data?.overview}
                         </p>
 
