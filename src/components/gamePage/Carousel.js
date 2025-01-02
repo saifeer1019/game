@@ -4,11 +4,12 @@ import { motion, useMotionValue, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 const SPRING_OPTIONS = {
-  type: "tween",
-  duration: 0.3,
-  ease: "easeInOut"
+  type: "spring",
+  stiffness: 100,
+  damping: 20,
 };
 
+const DRAG_THRESHOLD = 100; // More forgiving buffer for smoother user experience.
 const ONE_SECOND = 1000;
 const AUTO_DELAY = ONE_SECOND * 10;
 const DRAG_BUFFER = 50;
@@ -57,15 +58,13 @@ const Carousel = () => {
     return () => clearInterval(intervalRef);
   }, []);
 
-  const onDragEnd = () => {
-    const x = dragX.get();
-    if (x <= -DRAG_BUFFER && currentSlide < slides.length - 1) {
+  const onDragEnd = (event, info) => {
+    if (info.offset.x < -DRAG_THRESHOLD && currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
-    } else if (x >= DRAG_BUFFER && currentSlide > 0) {
+    } else if (info.offset.x > DRAG_THRESHOLD && currentSlide > 0) {
       setCurrentSlide((prev) => prev - 1);
     }
   };
-
   const handleNext = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
   };
