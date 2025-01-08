@@ -19,7 +19,7 @@ export default function Gallery({slice = 8, heading}) {
 
   return (
     <div className="w-full md:mb-10 px-6 overflow-hidden">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-x-6 md:gap-y-6">
+      <div className="grid grid-cols-1 gap-4 md:gap-x-6 md:gap-y-6">
         {games.slice(0, slice).map((game) => (
           <motion.div
             key={game.id}

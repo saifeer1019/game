@@ -73,26 +73,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter Subscription */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Stay Updated</h3>
-            <p className="text-sm text-white/60 mb-4">
-              Subscribe to our newsletter for the latest news, game releases, and updates.
-            </p>
-            <form className="flex flex-col space-y-4">
-              <input
-                type="email"
-                placeholder="Your Email Address"
-                className="px-4 py-2 bg-[#242424] text-white rounded-md text-sm focus:ring-2 focus:ring-[#0070f3] focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="px-4 py-2 bg-accent_ text-white rounded-md text-sm hover:bg-[#005bb5] transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
         </div>
 
         {/* Bottom Bar */}
