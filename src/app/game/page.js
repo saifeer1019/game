@@ -39,14 +39,14 @@ export default function GamePage() {
           <div 
           className="absolute inset-0 z-20"
           style={{
-          background: 'linear-gradient(to right, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%,  transparent 100%)'
+          background: 'linear-gradient(to right, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.5) 15%, rgba(17, 17, 17, 0.1) 30%, transparent 100%)'
       }}
       />
   
       <div 
       className="absolute inset-0 z-20"
       style={{
-          background: 'linear-gradient(to left, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 15%, transparent 100%)'
+          background: 'linear-gradient(to left, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.5) 15%, rgba(17, 17, 17, 0.1) 30%, transparent 100%)'
       }}
       />
   
