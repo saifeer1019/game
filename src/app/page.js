@@ -116,7 +116,7 @@ export default function Home() {
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between  ">
                 <h1 className="text-xl sm:text-2xl text-accent_ font-bold mb-2 sm:mb-4">
-                Top Airing
+                Great Hit
                 </h1>
             
               </div>
