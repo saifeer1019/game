@@ -76,15 +76,15 @@ export default function GamePage() {
           <div className="  flex flex-col lg:flex-row gap-4">
                     {/* Game Card */}
                     <div className="w-full  flex flex-col items-start shadow-lg bg-secondary_ rounded-lg ">
-                       <div className="w-full flex justify-between gap-8 items-center h-fit sm:mb-4">
+                       <div className="w-full flex justify-between gap-8 items-center sm:items-center h-fit sm:mb-4">
                        
-                       <h1 className="text-2xl w-[40vw] sm:w-fit  overflow-hidden  sm:text-3xl sm:font-bold text-white font-roboto font-semibold">
+                       <h1 className="text-2xl w-[40vw] sm:w-fit  overflow-hidden  sm:text-3xl font-bold text-white font-roboto ">
                             {game.data?.gameName}
                         </h1>
                          <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
                                   {/* Main Button */}
             <button 
-            className="w-full rounded md:w-auto  px-2 py-1 sm:rounded-[5px] bg-accent_  text-light_   sm:text-base
+            className="w-full rounded md:w-auto  px-2 py-1 sm:rounded-[5px] text-xs bg-accent_  text-light_   sm:text-base
                      flex items-center justify-center gap-2 sm:justify-self-end hover:bg-hover_ transition-colors"
             onClick={() => router.push('/game')}
           >
@@ -104,25 +104,27 @@ export default function GamePage() {
           </div>
                         
                         
-                        <div className="flex items-center  gap-2 mb-4 text-sm text-light_ ">
-                            <span className="bg-white/20  px-2 py-1 text-center rounded-[5px]  transition">
+                        <div className="flex flex-wrap mt-4 sm:mt-0 truncate items-center text-sm   gap-2 mb-4  text-light_ ">
+                            <span className="bg-white/20  px-2 py-1 text-center rounded-[5px]  ">
                                 {game.data?.genre[0]}
                             </span>
+                             <span className="bg-white/20 px-2 py-1 rounded-[5px]">{game.data?.language}</span>
+                        
                             <span className="bg-white/20 px-2 py-1 rounded-[5px] ">
                                 {game.data?.releaseDate}
                             </span>
-                              <span className="bg-white/20 px-2 py-1 text-sm rounded-[5px]">
+                              <span className="bg-white/20 px-2 py-1  rounded-[5px]">
                                 {game.data?.version}
                             </span>
 
-                            <span className="bg-white/20 px-2 py-1 text-sm rounded-[5px]">
+                            <span className="bg-white/20 px-2 py-1  rounded-[5px]">
                                 {game.data?.version}
                             </span>
                             <span className="flex items-center gap-1">
                                 <span className="text-yellow-400">★</span>
                                 {game.data?.rating}
                             </span>
-                            <span>{game.data?.language}</span>
+                           
                         </div>
 
                         <div className="flex flex-wrap text-white items-center gap-2 sm:gap-4 mb-4">
@@ -148,7 +150,7 @@ export default function GamePage() {
                         </div>
 
                            {/* Ads */}
-        <div className="bg-gray-600  sm:my-10 w-full  h-[20vh] mx-auto flex items-center justify-center text-4xl text-white">
+        <div className="bg-gray-600  my-8 sm:my-10 w-full  h-[20vh] mx-auto flex items-center justify-center text-4xl text-white">
         Ad
       </div>
                                         {/* Tabs */}
