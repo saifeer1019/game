@@ -212,7 +212,7 @@ export     const dummyGames = [
   }
 ]
 }},
-    {  imageUrl: 'https://owo.lewd.ninja/images/games/b_215741_69916d28265098afd895334859c64967.jpg',   "id": "2",
+    {  imageUrl: 'https://lewdflix.com/wp-content/uploads/2023/10/What-A-Legend-Wallpaper-scaled-e1698242903827-1800x626.webp',   "id": "2",
 "status": "done",
 "data": {
 "uID": "97458",
@@ -316,7 +316,7 @@ export     const dummyGames = [
   "School Setting"
 ],
 "trailer": "",
-"bannerURL": "https://attachments.f95zone.to/2024/11/4255536_v06_5_headerimg_1.png",
+"bannerURL": "https://lewdflix.com/wp-content/uploads/2023/10/What-A-Legend-Wallpaper-scaled-e1698242903827-1800x626.webp",
 "images": [
   {
     "alt": "L_RMF_007b.png",

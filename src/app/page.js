@@ -85,7 +85,7 @@ export default function Home() {
         <div className="mt-8 sm:mt-8 md:mt-14 w-full">
             <div className="flex items-start sm:items-center justify-between mb-4 md:mb-6 sm:px-6 md:px-8">
               <h1 className="text-xl sm:text-2xl text-white/80 font-semibold mb-2 sm:mb-0">
-                Most Played 
+                Most Voted 
               </h1>
               <div className='hidden sm:block'>
               <button className="flex items-center gap-x-1 border border-light_ px-2 py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
