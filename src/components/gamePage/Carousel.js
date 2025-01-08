@@ -74,7 +74,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative h-[75vh] w-full bg-primary_ flex items-center justify-center overflow-hidden">
+    <div className="relative h-[75vh]  sm:mt-0 w-full bg-primary_ flex items-center justify-center overflow-hidden">
       {/* Navigation Buttons */}
       <div className='absolute bottom-0 right-4 z-30 transform -translate-y-1/2 flex flex-col gap-2'>
         <button

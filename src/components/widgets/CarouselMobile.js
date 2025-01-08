@@ -49,7 +49,7 @@ const CarouselMobile = () => {
   };
 
   return (
-    <div className="relative h-[50vh] mt-8 w-full overflow-hidden">
+    <div className="relative h-[50vh] mt-14 w-full overflow-hidden">
       <motion.div
         className="flex w-full h-full"
         drag="x"

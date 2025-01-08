@@ -1,5 +1,3 @@
-import { Discord } from 'lucide-react';
-
 const Footer = () => {
   return (
     <footer className="bg-[#181816] text-white/80">
@@ -14,13 +12,19 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-white transition-colors">
-                
+                Twitter
               </a>
               <a href="#" className="hover:text-white transition-colors">
-               
+                Facebook
               </a>
               <a href="#" className="hover:text-white transition-colors">
-                
+                Instagram
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                YouTube
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Discord
               </a>
             </div>
           </div>
@@ -68,6 +72,27 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+
+          {/* Newsletter Subscription */}
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-4">Stay Updated</h3>
+            <p className="text-sm text-white/60 mb-4">
+              Subscribe to our newsletter for the latest news, game releases, and updates.
+            </p>
+            <form className="flex flex-col space-y-4">
+              <input
+                type="email"
+                placeholder="Your Email Address"
+                className="px-4 py-2 bg-[#242424] text-white rounded-md text-sm focus:ring-2 focus:ring-[#0070f3] focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 bg-accent_ text-white rounded-md text-sm hover:bg-[#005bb5] transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
         </div>
 
         {/* Bottom Bar */}
@@ -84,7 +109,7 @@ const Footer = () => {
                 Terms of Service
               </a>
               <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
-                Cookie Policy
+                Accessibility
               </a>
             </div>
           </div>
