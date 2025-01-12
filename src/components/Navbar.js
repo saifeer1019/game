@@ -3,12 +3,20 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import SearchBar from "./widgets/SearchBar";
-
+import {useRouter} from "next/navigation";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null); // Track active dropdown
+  const router = useRouter()
+  const handleAdmin = (e) => {
+    e.preventDefault();
+    router.push(`/admin`)
 
+   
+    
+    console.log(search);
+}
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -126,6 +134,8 @@ export default function Navbar() {
           <div className="hidden sm:block">
             <SearchBar />
           </div>
+          <button onClick={ handleAdmin} className="text-white bg-teal-300 hover:bg-hover_ focus:ring-4 focus:outline-none focus:ring-hover_ font-medium rounded-[4px] text-sm px-4 py-2 ">Admin</button>
+
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

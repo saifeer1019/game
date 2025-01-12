@@ -50,7 +50,7 @@ export default function Trending() {
               whileHover={{ scale: 1.02 }}
             >
               <div className="bg-secondary_ rounded-lg overflow-hidden shadow-lg">
-                <div className="relative aspect-[3/4] sm:h-[33vh]">
+                <div className="relative aspect-[3/4] sm:h-[85vh]">
                   <Image
                     src={movie.imageUrl}
                     alt={movie.gameName}
