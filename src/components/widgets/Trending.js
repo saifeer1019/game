@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Link } from "lucide-react";
 import { dummyGames } from "../DummyGames";
+import { useRouter } from "next/navigation";
 
-export default function Trending() {
+export default function Trending({games}) {
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(4); // Number of cards visible at a time
   const scrollStep = 2; // Number of cards to scroll at a time
@@ -38,22 +40,24 @@ export default function Trending() {
 
       <div className="overflow-hidden relative">
         <motion.div
-          className="flex gap-4"
+          className="flex gap-8"
           initial={false}
           animate={{ x: `-${(currentIndex * 100) / cardsToShow}%` }}
           transition={{ duration: 0.5 }}
         >
-          {dummyGames.map((movie, index) => (
+          {games && games.map((game, index) => (
             <motion.div
-              key={movie.imageUrl}
-              className="w-[calc(100%/4)] md:w-[calc(100%/3)] sm:w-[calc(100%/2)] p-2"
+              key={index}
+              className="cursor-pointer w-[calc(100%/4)] md:w-[calc(100%/3)] sm:w-[calc(100%/2)] "
               whileHover={{ scale: 1.02 }}
+              onClick={() => router.push(`/game/${game.id}`)}
             >
+            
               <div className="bg-secondary_ rounded-lg overflow-hidden shadow-lg">
-                <div className="relative aspect-[3/4] sm:h-[85vh]">
+                <div className="relative aspect-[3/4] sm:h-[35vh]">
                   <Image
-                    src={movie.imageUrl}
-                    alt={movie.gameName}
+                    src={game.data.bannerURL}
+                    alt={game.data.gameName}
                     fill
                     className="object-cover"
                   />
@@ -71,10 +75,11 @@ export default function Trending() {
                     }}
                     className="text-light_ text-lg font-semibold"
                   >
-                    {movie.data.gameName}
+                    {game.data.gameName}
                   </h1>
                 </div>
               </div>
+             
             </motion.div>
           ))}
         </motion.div>

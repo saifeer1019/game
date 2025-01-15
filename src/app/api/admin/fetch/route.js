@@ -19,7 +19,7 @@ export async function POST(request) {
                 continue}
             console.log(`orig https://f95db-backend-1022000040343.asia-east1.run.app/api/fetchFull?id=${12378}`);
             console.log(`nkj https://f95db-backend-1022000040343.asia-east1.run.app/api/fetchFull?id=${id}`);
-            await addDoc(gamesCollection, { ...response.data });
+            await addDoc(gamesCollection, { ...response.data, featured: false, trending: false, popular: false, views: 0 });
             
         }
         

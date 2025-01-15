@@ -10,12 +10,26 @@ import { useEffect, useState } from "react";
 import Landscape from "@/components/widgets/Landscape";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import {Info, Download} from "lucide-react"
+import {Info, Download, Eye} from "lucide-react"
+import axios from "axios";
 
 export default function GamePage() {
   const { id } = useParams();
+  
   const [game, setGame] = useState(dummyGames[1]);
-  const [activeTab, setActiveTab] = useState("overview");
+    const [activeTab, setActiveTab] = useState("overview");
+
+    useEffect(() => {
+            const fetchGame = async () => {
+                    try {
+                            const response = await axios.get(`/api/game?id=${id}`);
+                            setGame(response.data);
+                    } catch (error) {
+                            console.error('Error:', error);
+                    }
+            }
+            fetchGame();
+        }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col">
@@ -121,8 +135,12 @@ export default function GamePage() {
                                 {game.data?.version}
                             </span>
                             <span className="flex items-center gap-1">
-                                <span className="text-yellow-400">★</span>
-                                {game.data?.rating}
+                                <span className="text-yellow-400 self-start">★</span>
+                                {Number(game.data?.rating)?.toFixed(1)}
+                            </span>
+                              <span className="flex items-center gap-1">
+                                <Eye className="h-3 w-3 self-center">★</Eye>
+                                {game.views} {` `} views
                             </span>
                            
                         </div>

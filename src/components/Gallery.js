@@ -7,20 +7,15 @@ import { dummyGames } from './DummyGames';
 import { Link, Eye, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function Gallery({slice = 8, heading}) {
-  const [games, setGames] = useState(dummyGames);
+export default function Gallery({slice = 8, heading, games}) {
 
-  useEffect(() => {
-    // axios.get('http://localhost:3000/api/games')
-    //     .then(response => setGames(response.data))
-    //     .catch(error => console.error(error));
-    console.log('gfgfd');
-  }, []);
+
+ 
 
   return (
     <div className="w-full  sm:px-6 md:px-8 md:mb-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  md:gap-6">
-        {games.slice(0, slice).map((game) => (
+        {games && games.slice(0, slice).map((game) => (
           <motion.div
             key={game.id}
             className="flex flex-col items-center w-full cursor-pointer"
@@ -31,8 +26,8 @@ export default function Gallery({slice = 8, heading}) {
           >
             <div className="relative w-full aspect-[4/2]">
               <PortraitImageCrop
-                src={game.imageUrl}
-                alt={game.gameName}
+                src={game.data.bannerURL}
+                alt={game.data.gameName}
                 width="100%"
                 height="100%"
               />
@@ -70,7 +65,7 @@ export default function Gallery({slice = 8, heading}) {
 
                   <div className="flex flex-row items-center text-accent-300">
                     <Star className="w-3 h-3 mr-[2px]" />
-                    <p className="orbitron">{game.data.rating}</p>
+                    <p className="orbitron">{Number(game.data.rating).toFixed(1)}</p>
                   </div>
                 </div>
               </div>

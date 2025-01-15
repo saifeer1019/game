@@ -11,7 +11,7 @@ export default function Sidebar() {
   const navItems = [
     { name: "Games", path: "/admin" },
     { name: "Fetch", path: "/admin/fetch" },
-    { name: "Settings", path: "/settings" },
+    { name: "Sections", path: "/admin/sections" },
   ];
 
   return (

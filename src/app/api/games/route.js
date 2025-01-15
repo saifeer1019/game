@@ -1,30 +1,59 @@
-import { db } from "@/config/firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
 import { NextResponse } from "next/server";
-
-const gamesCollection = collection(db, "games");
-
-export async function POST(request) {
-  const { name, imageUrl } = await request.json();
-
-  if (!name || !imageUrl) {
-    return NextResponse.json({ error: "Name and imageUrl are required." }, { status: 400 });
-  }
-
-  try {
-    const docRef = await addDoc(gamesCollection, { name, imageUrl });
-    return NextResponse.json({ id: docRef.id, message: "Game added successfully!" }, { status: 201 });
-  } catch (error) {
-    return NextResponse.json({ error: "Failed to add game.", details: error.message }, { status: 500 });
-  }
-}
+import { db } from "@/config/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 export async function GET() {
   try {
-    const snapshot = await getDocs(gamesCollection);
-    const games = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    return NextResponse.json(games);
+    const gamesCollectionRef = collection(db, "games");
+
+    // Fetch games based on different categories
+    const fetchGamesByCategory = async (category) => {
+      const categoryQuery = query(gamesCollectionRef, where(category, "==", true));
+      const querySnapshot = await getDocs(categoryQuery);
+      return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    };
+
+       // Fetch games based on different genre
+       const fetchGamesByGenre = async (genre) => {
+        const genreQuery = query(gamesCollectionRef, where("data.genre", "array-contains", genre));
+        const querySnapshot = await getDocs(genreQuery);
+        return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      };
+
+    // Fetch all required categories in parallel
+    const [sandbox, threDCG, voyeurism, twoDGame] = await Promise.all([
+      fetchGamesByGenre("Sandbox"),
+      fetchGamesByGenre("3DCG"),
+      fetchGamesByGenre("Voyeurism"),
+      fetchGamesByGenre("2D Game"),
+    ]);
+
+
+      // Fetch all required genre in parallel
+      const [featuredGames, trendingGames, popularGames, mostViewedGames] = await Promise.all([
+        fetchGamesByCategory("featured"),
+        fetchGamesByCategory("trending"),
+        fetchGamesByCategory("popular"),
+        fetchGamesByCategory("mostViewed"),
+      ]);
+
+    
+
+    // Construct the response object
+    const response = {
+      featured: featuredGames,
+      trending: trendingGames,
+      popular: popularGames,
+      mostViewed: mostViewedGames,
+      sandbox:sandbox,
+      threDCG:threDCG,
+      voyeurism: voyeurism,
+      twoDGame: twoDGame
+    };
+
+    return NextResponse.json(response);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch games.", details: error.message }, { status: 500 });
+    console.error("Error fetching games by categories:", error);
+    return NextResponse.json({ error: "Failed to fetch games" }, { status: 500 });
   }
 }

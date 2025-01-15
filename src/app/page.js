@@ -1,5 +1,5 @@
 'use client';
-
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
@@ -19,22 +19,26 @@ import Trending from '@/components/widgets/Trending';
 
 import CarouselMobile from '@/components/widgets/CarouselMobile';
 export default function Home() {
-  const [categories] = useState([
-    { 
-      title: 'Trending Now',
-      items: Array(6).fill({}).map((_, i) => ({
-        title: `Trending Movie ${i + 1}`,
-        imageUrl: `/thumbnail-${i + 1}.jpg`
-      }))
-    },
-    { 
-      title: 'Popular on Netflix',
-      items: Array(6).fill({}).map((_, i) => ({
-        title: `Popular Movie ${i + 1}`,
-        imageUrl: `/thumbnail-${i + 1}.jpg`
-      }))
-    },
-  ]);
+  const [games, setGames] = useState([])
+  useEffect(() => {
+    const fetchGames = async () => {
+            try {
+                    const response = await axios.get(`/api/games`, {
+                            params: {
+                                    limit: 5
+                            },
+                          
+                    });
+                    setGames(response.data);
+            } catch (error) {
+                    console.error('Error:', error);
+            }
+    }
+
+   
+    fetchGames();
+}, []);
+  
 
   const featuredContent = [{
     title: "Heartstrings",
@@ -69,17 +73,17 @@ export default function Home() {
       <div className="flex flex-col items-start justify-center mt-4 sm:mt-8 md:mt-14">
         <div className="w-full px-4 sm:px-0 md:px-0">
           <div className="w-full hidden sm:block px-4 sm:px-0">
-            <Carousel />
+           <Carousel slides={games.featured} />
           </div>
           <div className="w-full block sm:hidden  sm:px-0">
-          <CarouselMobile/>
+          <CarouselMobile slides={games.featured} />
         </div>
 
    
         
 
         <div className=" sm:mt-24  w-full">
-          <Trending />
+          <Trending games={games.trending}/>
           </div>
         
         <div className="mt-8 sm:mt-8 md:mt-14 w-full">
@@ -97,7 +101,7 @@ export default function Home() {
             </div>
 
             <div className="w-full">
-              <Gallery />
+              <Gallery games={games.trending} />
             </div>
           </div>
 
@@ -109,7 +113,7 @@ export default function Home() {
           <div className="mt-6 sm:mt-8 md:mt-14 w-full md:border-t-[1px] md:border-muted_ md:pt-6">
           
 
-            <div className="grid md:mx-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4 md:gap-y-6">
+            <div className="grid md:mx-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-4 md:gap-y-6">
 
           {/*trending */}
             <div className='flex flex-col mt-4 sm:mt-0'>
@@ -120,7 +124,7 @@ export default function Home() {
                 </h1>
             
               </div>
-            <GalleryPills />
+            <GalleryPills games={games.sandbox} />
 
             <button className="flex items-center w-fit tracking-wide sm:mt-2 gap-x-1  py-1 text-light_ text-lg sm:text-base hover:bg-cyan-500/10 transition-colors">
             
@@ -140,7 +144,7 @@ export default function Home() {
           </h1>
       
         </div>
-      <GalleryPills />
+        <GalleryPills games={games.twoDGame} />
 
       <button className="flex items-center w-fit tracking-wide mt-2 gap-x-1  py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
       
@@ -160,7 +164,7 @@ export default function Home() {
           </h1>
       
         </div>
-      <GalleryPills />
+        <GalleryPills games={games.threDCG} />
 
       <button className="flex items-center w-fit tracking-wide sm:mt-2 gap-x-1  py-1 text-light_ text-base hover:bg-cyan-500/10 transition-colors">
       
@@ -180,7 +184,7 @@ export default function Home() {
           </h1>
       
         </div>
-      <GalleryPills />
+        <GalleryPills games={games.voyeurism} />
 
       <button className="flex items-center w-fit tracking-wide sm:mt-2 gap-x-1  py-1 text-light_ text-base hover:bg-cyan-500/10 transition-colors">
       
@@ -212,10 +216,10 @@ export default function Home() {
             </div>
 
             <div className="w-full">
-              <Gallery />
+            <Gallery games={games.trending} />
             </div>
             <div className="w-full">
-            <Gallery />
+            <Gallery games={games.trending} />
           </div>
           </div>
         </div>
