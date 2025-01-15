@@ -22,6 +22,7 @@ export default function Gallery({slice = 8, heading}) {
       <div className="grid grid-cols-1 gap-4 md:gap-x-6 md:gap-y-6">
         {games.slice(0, slice).map((game) => (
           <motion.div
+            onClick={() => window.location.href = `/game/${game.id}`}
             key={game.id}
             className="flex flex-col items-center w-full cursor-pointer"
             whileHover={{

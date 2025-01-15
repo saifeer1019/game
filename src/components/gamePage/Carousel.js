@@ -97,10 +97,37 @@ const Carousel = ({slides}) => {
           >
           <div className="w-full z-20 md:absolute md:bottom-4 md:left-10 z- md:w-1/2 flex flex-col justify-between">
           <div>
-            <h1 className="text-2xl md:text-4xl font-bold mb-4 text-light_">
-              {slide.data.gameNametitle}
+            <h1 className="text-2xl md:text-6xl font-bold mb-4 text-light_">
+              {slide.data.gameName}
             </h1>
-            <p className="text-sm md:text-base w-[80%] text-neutral-300 mb-4 leading-relaxed">
+
+              {/* Tags Container */}
+           <div className="flex flex-wrap gap-2 my-4">
+           <button className="text-xs self-end  px-4 py-1 bg-secondary_ text-light_ rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
+                router.push(`/game`);
+              }}>
+          
+              {slide.data.genre[0]}
+              </button>
+    
+              <button className="text-xs self-end  px-4 py-1 bg-secondary_ text-light_ rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
+                router.push(`/game`);
+              }}>
+           
+              {slide.data.genre[1]}
+              </button>
+          { /*<div className=' flex gap-x-2 self-end  h-fit '>
+          <div className='rounded orbitron bg-yellow-700 text-sm h-fit px-3 py-1 text-white/80'>
+          <p className=''> {slide.tags[0]}</p>
+          </div>
+    
+          <div className='rounded orbitron bg-rose-700 text-sm h-fit  px-3 py-1 text-white/80'>
+          <p className=''> {slide.tags[1]}</p>
+          </div>
+    
+          </div>*/}
+              </div>
+            <p className="Bebas_Neue text-sm md:text-base w-[80%] text-neutral-300 mb-4 leading-relaxed">
               {slide.data.overview.slice(0, 180)}
             </p>
           </div>
@@ -108,42 +135,17 @@ const Carousel = ({slides}) => {
           <div className="space-y-4">
             {/* Main Button */}
             <button 
-              className="w-full rounded md:w-auto px-6 py-3 bg-accent_  text-light_  
-                       flex items-center justify-center gap-2 hover:bg-hover_ transition-colors"
+              className="w-full font-semibold rounded-[20px] md:w-auto px-3 mt-4 py-2 bg-accent_  text-light_  
+                       flex items-center justify-center gap-1 hover:bg-hover_ transition-colors"
               onClick={() => router.push('/game/' + slide.id)}
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 " fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
               Game Details
             </button>
   
-            {/* Tags Container */}
-           <div className="flex flex-wrap gap-2">
-         <button className="text-xs self-end  px-4 py-1 bg-secondary_ text-light_ rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
-              router.push(`/game`);
-            }}>
-        
-            {slide.data.genre[0]}
-            </button>
-  
-            <button className="text-xs self-end  px-4 py-1 bg-secondary_ text-light_ rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
-              router.push(`/game`);
-            }}>
-         
-            {slide.data.genre[1]}
-            </button>
-        { /*<div className=' flex gap-x-2 self-end  h-fit '>
-        <div className='rounded orbitron bg-yellow-700 text-sm h-fit px-3 py-1 text-white/80'>
-        <p className=''> {slide.tags[0]}</p>
-        </div>
-  
-        <div className='rounded orbitron bg-rose-700 text-sm h-fit  px-3 py-1 text-white/80'>
-        <p className=''> {slide.tags[1]}</p>
-        </div>
-  
-        </div>*/}
-            </div>
+          
           </div>
         </div>
 

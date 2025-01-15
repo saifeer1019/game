@@ -16,7 +16,7 @@ import axios from "axios";
 export default function GamePage() {
   const { id } = useParams();
   
-  const [game, setGame] = useState(dummyGames[1]);
+  const [game, setGame] = useState();
     const [activeTab, setActiveTab] = useState("overview");
 
     useEffect(() => {
@@ -32,15 +32,19 @@ export default function GamePage() {
         }, []);
 
   return (
+    
     <div className="relative min-h-screen flex flex-col">
       {/* Background */}
       <div className="absolute inset-0 bg-primary_" style={{ zIndex: -5 }}></div>
 
       {/* Navbar */}
       <Navbar />
-
+      {!game && (
+        <div className="flex items-center bg-primary_ justify-center h-screen">
+        </div>  
+    )}
       {/* Main Content */}
-      <motion.div
+     {game && <motion.div
         className="relative flex flex-col gap-y-8 px-0 lg:px-8 mt-8 lg:mt-14"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -82,6 +86,7 @@ export default function GamePage() {
       alt={game.data?.gameName || 'banner'}
       height={300}
       className="absolute inset-0 z-10 object-cover"
+      objectPosition= "center"
   />
 </div>
 
@@ -380,7 +385,7 @@ export default function GamePage() {
 
      
       </motion.div>
-
+}
       {/* Footer */}
       <Footer />
     </div>

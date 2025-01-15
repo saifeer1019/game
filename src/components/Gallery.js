@@ -18,6 +18,7 @@ export default function Gallery({slice = 8, heading, games}) {
         {games && games.slice(0, slice).map((game) => (
           <motion.div
             key={game.id}
+            onClick={() => window.location.href = `/game/${game.id}`}
             className="flex flex-col items-center w-full cursor-pointer"
             whileHover={{
               scale: 1.05,

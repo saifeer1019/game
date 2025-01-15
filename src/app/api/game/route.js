@@ -1,19 +1,22 @@
 import { NextResponse } from "next/server";
 import { db } from "@/config/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import {collection, getDocs, updateDoc, query, where } from "firebase/firestore";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-
+  const id_ = searchParams.get("id");
+  const gamesCollectionRef = collection(db, "games");
   // Reference to the game document
-  const gameDocRef = doc(db, "games", id);
+  const gameQuery = query(gamesCollectionRef, where("id", "==", id_));
 
   try {
-    // Fetch the game document
-    const gameDoc = await getDoc(gameDocRef);
+    // Fetch the game documents
+    const querySnapshot = await getDocs(gameQuery);
 
-    if (gameDoc.exists()) {
+    if (!querySnapshot.empty) {
+      const gameDoc = querySnapshot.docs[0];
+      const gameDocRef = gameDoc.ref;
+
       // Increment the views field
       await updateDoc(gameDocRef, {
         views: (gameDoc.data().views || 0) + 1,
