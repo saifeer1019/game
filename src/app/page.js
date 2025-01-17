@@ -13,13 +13,13 @@ import { dummyGames } from '@/components/DummyGames';
 import { Eye, ChevronRight } from 'lucide-react';
 import Footer from '@/components/Footer';
 import Trending from '@/components/widgets/Trending';
-
-
-
+import LottieAnimation from "@/components/LottieAnimation";
+import bubblesAnimation from "./lottie.json"; // Path to your Lottie JSON file
 
 import CarouselMobile from '@/components/widgets/CarouselMobile';
 export default function Home() {
   const [games, setGames] = useState([])
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const fetchGames = async () => {
             try {
@@ -30,6 +30,7 @@ export default function Home() {
                           
                     });
                     setGames(response.data);
+                    setLoading(false)
             } catch (error) {
                     console.error('Error:', error);
             }
@@ -39,30 +40,16 @@ export default function Home() {
     fetchGames();
 }, []);
   
-
-  const featuredContent = [{
-    title: "Heartstrings",
-    description: "A young man moves into a new apartment, discovering a summoning circle and making a deal with a Demoness, gaining new physical...tools and abilities, in exchange for possibly losing his immortal soul!",
-    imageUrl: "https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg",
-    type: "series",
-    tags: ['VN', 'Adult']
-  },
-  {
-    title: "Heartstrings",
-    description: "A young man moves into a new apartment, discovering a summoning circle and making a deal with a Demoness, gaining new physical...tools and abilities, in exchange for possibly losing his immortal soul!",
-    imageUrl: "https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg",
-    type: "series",
-    tags: ['VN', 'Adult']
-  },
-  {
-    title: "Heartstrings",
-    description: "A young man moves into a new apartment, discovering a summoning circle and making a deal with a Demoness, gaining new physical...tools and abilities, in exchange for possibly losing his immortal soul!",
-    imageUrl: "https://owo.lewd.ninja/images/games/b_46791_2e9193dcf1d84bc8224b8d501275b43c.jpg",
-    type: "series",
-    tags: ['VN', 'Adult']
-  },
-
-]
+if (loading) {
+  return (
+    <div className="min-h-screen bg-primary_ text-light_ flex items-center justify-center">
+  
+    <LottieAnimation animationData={bubblesAnimation} className="lottie-container" />
+    
+    </div>
+  )
+}
+  
 
   return (
     <div className="relative min-h-screen flex flex-col justify-start">

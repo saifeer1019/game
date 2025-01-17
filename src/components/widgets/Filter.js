@@ -5,16 +5,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useState } from 'react'
 import SearchBar from "./SearchBar"
 
-export default function Filter() {
-    const [filters, setFilters] = useState({
-        operatingSystem: '',
-        releaseYear: '',
-        rating: '',
-        developer: '',
-        category: ''
-    })
-
-    const [sortOrder, setSortOrder] = useState('')
+export default function Filter({ filters, setFilters, setSortOrder, sortOrder}) {
 
     const operatingSystems = ['Windows', 'Linux', 'Mac', 'Android']
     const ratings = ['1', '2', '3', '4', '5']
