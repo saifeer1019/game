@@ -11,17 +11,22 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import LottieAnimation from "@/components/LottieAnimation";
 import bubblesAnimation from "../lottie.json"; // Path to your Lottie JSON file
-
+import Gallery from "@/components/gamePage/Gallery";
 const GamePage = () => {
     const { id } = useParams();
   const [game, setGame] = useState();
+  const [relatedGames, setRelatedGames] = useState();
   const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
     const fetchGame = async () => {
             try {
-                    const response = await axios.get(`/api/game?id=${152482}`);
+                    let response = await axios.get(`/api/game?id=${id}`);
                     setGame(response.data);
+
+                    let response_ = await axios.get(`/api/relatedGames?genre=${`Sandbox`}`);
+                    setRelatedGames(response_.data);
+
             } catch (error) {
                     console.error('Error:', error);
             }
@@ -232,7 +237,7 @@ const GamePage = () => {
                                   {/* Screenshots */}
         <div>
         <h2 className="text-2xl font-bold mb-4">Screenshots</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3  gap-4">
           {game.data.images.slice(0, 8).map((image) => (
             <div key={image.id} className="relative aspect-video rounded-lg overflow-hidden">
               <Image
@@ -246,6 +251,12 @@ const GamePage = () => {
           ))}
         </div>
       </div>
+
+               {relatedGames && (       <h1 className="text-xl w-full pt-4 text-light_ sm:text-lg  font-roboto font-semibold">
+             More games like this
+          </h1>)}
+              <Gallery games={relatedGames} slice={6} heading="Related Games" flex='side' />
+                  
 
 
 

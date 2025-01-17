@@ -7,8 +7,8 @@ import { dummyGames } from '../DummyGames';
 import { Link, Eye, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function Gallery({slice = 8, heading}) {
-  const [games, setGames] = useState(dummyGames);
+export default function Gallery({slice = 8, heading, games}) {
+ 
 
   useEffect(() => {
     // axios.get('http://localhost:3000/api/games')
@@ -18,9 +18,14 @@ export default function Gallery({slice = 8, heading}) {
   }, []);
 
   return (
-    <div className="w-full md:mb-10 px-6 overflow-hidden">
-      <div className="grid grid-cols-1 gap-4 md:gap-x-6 md:gap-y-6">
-        {games.slice(0, slice).map((game) => (
+    <div className="w-full md:mb-10  overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-x-6 md:gap-y-6">
+      {!games && (
+        <h1>Loading</h1>
+      )} 
+      
+      
+      {games && games.slice(0, slice).map((game) => (
           <motion.div
             onClick={() => window.location.href = `/game/${game.id}`}
             key={game.id}
@@ -32,8 +37,8 @@ export default function Gallery({slice = 8, heading}) {
           >
             <div className="relative w-full aspect-[4/2]">
               <PortraitImageCrop
-                src={game.imageUrl}
-                alt={game.gameName}
+                src={game.data.bannerURL}
+                alt={game.data.gameName}
                 width="100%"
                 height="100%"
               />
@@ -61,7 +66,7 @@ export default function Gallery({slice = 8, heading}) {
                 <div className="flex flex-row gap-x-4 text-muted_">
                   <div className="flex flex-row items-center">
                     <Eye className="w-3 h-3 mr-[2px]" />
-                    <p className="orbitron">{game.data.ratingCount} Views</p>
+                    <p className="orbitron">{game.views} Views</p>
                   </div>
 
                   <div className="flex flex-row items-center">
@@ -71,7 +76,7 @@ export default function Gallery({slice = 8, heading}) {
 
                   <div className="flex flex-row items-center text-accent-300">
                     <Star className="w-3 h-3 mr-[2px]" />
-                    <p className="orbitron">{game.data.rating}</p>
+                    <p className="orbitron">{Number(game.data.rating).toFixed(1)}</p>
                   </div>
                 </div>
               </div>
