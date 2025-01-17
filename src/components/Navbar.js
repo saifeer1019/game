@@ -117,15 +117,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Link href="/games" className="hover:text-accent_ transition-colors">
-              Games
-            </Link>
-            <Link href="/new" className="hover:text-accent_ transition-colors">
-              New & Popular
-            </Link>
-            <Link href="/my-list" className="hover:text-accent_ transition-colors">
-              My List
-            </Link>
+            
           </div>
         </div>
 
@@ -134,8 +126,7 @@ export default function Navbar() {
           <div className="hidden sm:block">
             <SearchBar />
           </div>
-          <button onClick={ handleAdmin} className="text-white bg-teal-300 hover:bg-hover_ focus:ring-4 focus:outline-none focus:ring-hover_ font-medium rounded-[4px] text-sm px-4 py-2 ">Admin</button>
-
+         
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

@@ -53,7 +53,7 @@ const CarouselMobile = ({slides}) => {
                 <button 
                   className="w-fit rounded-full py-2 px-4 bg-accent_ text-primary_ 
                            flex items-center justify-center gap-1 text-sm hover:bg-hover_ transition-colors"
-                  onClick={() => router.push('/game')}
+                  onClick={() => router.push('/game' + slide.id)}
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
