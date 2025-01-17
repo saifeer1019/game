@@ -13,13 +13,13 @@ import { dummyGames } from '@/components/DummyGames';
 import { Eye, ChevronRight } from 'lucide-react';
 import Footer from '@/components/Footer';
 import Trending from '@/components/widgets/Trending';
-import LottieAnimation from "@/components/LottieAnimation";
-import bubblesAnimation from "./lottie.json"; // Path to your Lottie JSON file
+
+
+
 
 import CarouselMobile from '@/components/widgets/CarouselMobile';
 export default function Home() {
   const [games, setGames] = useState([])
-  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const fetchGames = async () => {
             try {
@@ -30,7 +30,6 @@ export default function Home() {
                           
                     });
                     setGames(response.data);
-                    setLoading(false)
             } catch (error) {
                     console.error('Error:', error);
             }
@@ -40,15 +39,7 @@ export default function Home() {
     fetchGames();
 }, []);
   
-if (loading) {
-  return (
-    <div className="min-h-screen bg-primary_ text-light_ flex items-center justify-center">
-  
-    <LottieAnimation animationData={bubblesAnimation} className="lottie-container" />
-    
-    </div>
-  )
-}
+
   
 
   return (
