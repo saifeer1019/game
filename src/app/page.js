@@ -1,4 +1,5 @@
 'use client';
+import dynamic from 'next/dynamic';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -13,7 +14,8 @@ import { dummyGames } from '@/components/DummyGames';
 import { Eye, ChevronRight } from 'lucide-react';
 import Footer from '@/components/Footer';
 import Trending from '@/components/widgets/Trending';
-import LottieAnimation from "@/components/LottieAnimation";
+const LottieAnimation = dynamic(() => import('@/components/LottieAnimation'), { ssr: false });
+
 import bubblesAnimation from "./lottie.json"; // Path to your Lottie JSON file
 
 
