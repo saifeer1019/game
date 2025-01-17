@@ -16,7 +16,6 @@ const DRAG_BUFFER = 50;
 
 const Carousel = ({slides}) => {
   const router = useRouter();
-  console.log(slides);
 
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -105,14 +104,14 @@ const Carousel = ({slides}) => {
               {/* Tags Container */}
            <div className="flex flex-wrap gap-2 my-4">
            <button className="text-xs self-end  px-4 py-1 bg-secondary_ text-light_ rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
-                router.push(`/game` + slide.id);
+                router.push(`/game`);
               }}>
           
               {slide.data.genre[0]}
               </button>
     
               <button className="text-xs self-end  px-4 py-1 bg-secondary_ text-light_ rounded flex items-center hover:bg-opacity-80 cursor-pointer" onClick={() => {
-                router.push(`/game` + slide.id);
+                router.push(`/game`);
               }}>
            
               {slide.data.genre[1]}
