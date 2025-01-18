@@ -8,6 +8,8 @@ import axios from "axios";
 
 export default function Fetch() {
   const [currentTab, setCurrentTab] = useState("fetch");
+  const [fetching, setFetching] = useState(false);  
+  const [fetched, setFetched] = useState(false); 
   const [gameIds, setGameIds] = useState([]);
 
   const handleFileUpload = (event) => {
@@ -23,8 +25,11 @@ export default function Fetch() {
 
   const handleFetch = async () => {
     try {
+      setFetching(true);
       const response = await axios.post('/api/admin/fetch', { ids:gameIds });
       console.log(response);
+      setFetching(false);
+      setFetched(true);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -33,12 +38,22 @@ export default function Fetch() {
   return (
     <div className="flex flex-row h-screen">
       <Sidebar currentTab={currentTab} setCurrentTab={setCurrentTab} />
-      <div className="p-4">
+      <div className="p-4 flex flex-col w-full h-screen justify-center items-center">
+    { !fetching && <div className="p-4  self-center justify-self-center">
         <input type="file" accept=".json" onChange={handleFileUpload} />
         <Button className="bg-gray-300 px-2 py-1 rounded" onClick={handleFetch} disabled={gameIds.length === 0}>
           Fetch Games
         </Button>
-      </div>
+        </div>}
+
+        {fetching && <p className="text-lg text-gray-400 self-center justify-self-center">Fetching games. Please wait...</p>}
+        {fetched && <div className="">
+          Successfully fetched games
+          
+          </div>
+        }
+      
+        </div>
     </div>
   );
 }

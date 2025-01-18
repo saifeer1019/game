@@ -20,9 +20,7 @@ export default function Gallery({slice = 8, heading, games}) {
   return (
     <div className="w-full md:mb-10  overflow-hidden">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-x-6 md:gap-y-6">
-      {!games && (
-        <h1>Loading</h1>
-      )} 
+     
       
       
       {games && games.slice(0, slice).map((game) => (

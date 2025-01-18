@@ -2,7 +2,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/config/firebase";
 import { 
   collection, 
-  getDocs, 
+  getDocs,
+  getDoc,
+  doc, 
   query, 
   where, 
   limit, 
@@ -11,122 +13,110 @@ import {
 } from "firebase/firestore";
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const searchQuery = searchParams.get("query") || "";
-  const page = parseInt(searchParams.get("page") || "1", 10);
-  const operatingSystem = searchParams.get("operatingSystem") || "";
-  const releaseYear = searchParams.get("releaseYear") || "";
-  const rating = searchParams.get("rating") || "";
-  const developer = searchParams.get("developer") || "";
-  const category = searchParams.get("category") || "";
+  // Get the actual search path and parameters
+  const url = new URL(request.url);
+  console.log('Full URL:', url.toString());
+  
+  const searchQuery = url.searchParams.get("query") || "";
+  const lastDocId = url.searchParams.get("lastDocId") || null;
+  const page = parseInt(url.searchParams.get("page") || "1", 10);
+  const operatingSystem = url.searchParams.get("operatingSystem") || "";
+  const releaseYear = url.searchParams.get("releaseYear") || "";
+  const rating = url.searchParams.get("rating") || "";
+  const developer = url.searchParams.get("developer") || "";
+  const genre = url.searchParams.get("genre") || "";
+  const tags = url.searchParams.get("tags") || ""; 
+  const sortOrder = url.searchParams.get("orderBy") || "";
 
-  console.log('Search Parameters:', {
+  console.log('Parsed search parameters:', {
     searchQuery,
+    lastDocId,
     page,
     operatingSystem,
     releaseYear,
     rating,
     developer,
-    category
+    genre,
+    tags,
+    sortOrder
   });
 
-  const pageSize = 10;
+  const pageSize = 12;
   const gamesCollectionRef = collection(db, "games");
 
   try {
     let queryConstraints = [];
-    
-    // Only proceed with search if there's actually a query
+
+    // Add search filter if there's a search query
     if (searchQuery.trim()) {
       const lowercaseQuery = searchQuery.toLowerCase().trim();
-      console.log('Searching for keyword:', lowercaseQuery);
-      
-      queryConstraints.push(where("gameNameKeywords", "array-contains", lowercaseQuery));
+      console.log('Adding search filter for:', lowercaseQuery);
+      // Log the full constraint for debugging
+      const searchConstraint = where("gameNameKeywords", "array-contains", lowercaseQuery);
+      console.log('Search constraint:', {
+        type: searchConstraint.type,
+        fieldPath: searchConstraint._fieldPath?.toString(),
+        opStr: searchConstraint._opStr,
+        value: searchConstraint._value
+      });
+      queryConstraints.push(searchConstraint);
     }
 
-    // Add other filters
-    if (operatingSystem) queryConstraints.push(where("operatingSystem", "==", operatingSystem));
-    if (releaseYear) queryConstraints.push(where("releaseYear", "==", parseInt(releaseYear)));
-    if (rating) queryConstraints.push(where("rating", "==", parseFloat(rating)));
-    if (developer) queryConstraints.push(where("developer", "==", developer));
-    if (category) queryConstraints.push(where("category", "==", category));
-
-    // Add orderBy and limit
-    queryConstraints.push(orderBy("data.gameName"));
+    // Add order by
+    const orderByConstraint = orderBy("data.gameName", sortOrder === 'desc' ? 'desc' : 'asc');
+    queryConstraints.push(orderByConstraint);
+    
+    // Add pagination
     queryConstraints.push(limit(pageSize));
 
-    console.log('Query constraints:', queryConstraints.map(c => {
-      if (c.type === 'where') {
-        return {
-          type: 'where',
-          field: c._fieldPath?.toString(),
-          operator: c._opStr,
-          value: c._value
-        };
+    // Add startAfter if lastDocId is provided
+    if (lastDocId) {
+      console.log('Fetching last document:', lastDocId);
+      const lastDocRef = doc(db, "games", lastDocId);
+      const lastDocSnapshot = await getDoc(lastDocRef);
+      if (lastDocSnapshot.exists()) {
+        queryConstraints.push(startAfter(lastDocSnapshot));
       }
-      return {
-        type: c.type,
-        field: c._field?.toString(),
-        direction: c._direction
-      };
+    }
+
+    // Log the final query setup
+    console.log('Query constraints before execution:', queryConstraints.map(c => ({
+      type: c.type,
+      fieldPath: c._fieldPath?.toString() || c._field?.toString(),
+      opStr: c._opStr,
+      value: c._value,
+      direction: c._direction
+    })));
+
+    // Execute query
+    const finalQuery = query(gamesCollectionRef, ...queryConstraints);
+    const querySnapshot = await getDocs(finalQuery);
+    
+    // Log results
+    console.log('Query returned', querySnapshot.size, 'documents');
+    
+    // if (querySnapshot.size > 0) {
+    //   console.log('First document data:', {
+    //     id: querySnapshot.docs[0].id,
+    //     data: querySnapshot.docs[0].data()
+    //   });
+    // }
+
+    const games = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
     }));
 
-    // Only execute query if we have a search term or other filters
-    if (queryConstraints.length > 2 || !searchQuery.trim()) {  // >2 because we always have orderBy and limit
-      // Execute final query
-      const finalQuery = query(gamesCollectionRef, ...queryConstraints);
-      const querySnapshot = await getDocs(finalQuery);
-      
-      console.log('Query results count:', querySnapshot.size);
-      
-      // Log first few documents for debugging
-      querySnapshot.docs.slice(0, 3).forEach((doc, index) => {
-        const data = doc.data();
-        console.log(`Document ${index + 1}:`, {
-          id: doc.id,
-          gameName: data.data?.gameName,
-          keywords: data.gameNameKeywords,
-          searchableGameName: data.searchableGameName
-        });
-      });
-
-      // Create a Map to deduplicate games based on gameName
-      const uniqueGames = new Map();
-      querySnapshot.docs.forEach(doc => {
-        const data = doc.data();
-        const gameName = data.data?.gameName;
-        if (!uniqueGames.has(gameName)) {
-          uniqueGames.set(gameName, {
-            id: doc.id,
-            ...data
-          });
-        }
-      });
-
-      const games = Array.from(uniqueGames.values());
-
-      return NextResponse.json({
-        games,
-        totalPages: Math.ceil(games.length / pageSize),
-        currentPage: page,
-        hasMore: games.length === pageSize,
-      });
-    } else {
-      // Return empty results if no search term or filters
-      return NextResponse.json({
-        games: [],
-        totalPages: 0,
-        currentPage: 1,
-        hasMore: false,
-      });
-    }
-  } catch (error) {
-    console.error("Error fetching games:", error);
-    console.error("Error details:", {
-      name: error.name,
-      message: error.message,
-      stack: error.stack
+    return NextResponse.json({
+      games,
+      currentPage: page,
+      hasMore: games.length === pageSize,
+      lastDocId: games.length > 0 ? games[games.length - 1].id : null
     });
+
+  } catch (error) {
+    console.error("Error in search:", error);
+    console.error("Stack trace:", error.stack);
     return NextResponse.json(
       { error: "Internal server error", details: error.message },
       { status: 500 }

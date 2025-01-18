@@ -16,6 +16,11 @@ export default function SearchPage() {
     const [games, setGames] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
+    const [lastDocId, setLastDocId] = useState(null);  // To store the last document for pagination
+
+    const [hasMore, setHasMore] = useState(true);  // To check if there are more games to fetch
+    const [loading, setLoading] = useState(false);  // To manage loading state
+    const [error, setError] = useState(null);
 
     // Filters state
     const [filters, setFilters] = useState({
@@ -34,36 +39,51 @@ export default function SearchPage() {
         setQuery(queryParams.get('query') || '');
     }, []);
 
-    // Fetch games with filters, sort, and pagination
+    // Function to fetch games
+    const fetchGames = async (lastDocId = null) => {
+        try {
+            
+            const response = await axios.get('http://localhost:3000/api/search', {
+                params: {
+                    query,
+                    page: currentPage,
+                    operatingSystem: filters.operatingSystem,
+                    releaseYear: filters.releaseYear,
+                    rating: filters.rating,
+                    developer: filters.developer,
+                    category: filters.category,
+                    sortOrder,
+                    limit: 5,
+                    lastDocId: lastDocId,
+                }
+            });
+
+            // Handle the response data
+            const newGames = response.data.games;
+            const newLastDocId = response.data.lastDocId;
+
+            // Update state with new games and lastDocId
+            setGames(newGames);
+            setLastDocId(newLastDocId);
+
+            // If no nextDocId, set hasMore to false
+            setHasMore(!!newLastDocId);
+
+            setLoading(false);
+        } catch (error) {
+            console.error("Error:", error);
+            setError(error);
+            setLoading(false);
+        }
+    };
+
+    // Fetch games on mount and when dependencies change
     useEffect(() => {
-        const fetchGames = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/search', {
-                    params: {
-                        query,
-                        page: currentPage,
-                        operatingSystem: filters.operatingSystem,
-                        releaseYear: filters.releaseYear,
-                        rating: filters.rating,
-                        developer: filters.developer,
-                        category: filters.category,
-                        sortOrder
-                    }
-                });
-
-                setGames(response.data.games);
-                setTotalPages(response.data.totalPages);
-            } catch (error) {
-                console.error('Error fetching games:', error);
-            }
-        };
-
         fetchGames();
     }, [query, currentPage, filters, sortOrder]);
 
-    // Handle pagination change
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
+    const handleLoadMore = () => {
+        fetchGames(lastDocId);  // Fetch next set of games
     };
 
     return (
@@ -89,14 +109,17 @@ export default function SearchPage() {
                     <Gallery games={games} />
                 </div>
 
-                <Pagination 
-                    currentPage={currentPage} 
-                    totalPages={totalPages} 
-                    onPageChange={handlePageChange} 
-                />
-
+                    <button
+                        onClick={handleLoadMore}
+                        className="px-4 py-2 rounded-lg bg-accent_ text-light_ w-fit self-center my-10 justify-self-end"
+                    >
+                        View More
+                    </button>
+                
                 <Footer />
             </div>
+
+            {error && <div className="text-red-500">{error.message}</div>}
         </div>
     );
 }

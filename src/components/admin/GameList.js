@@ -1,20 +1,19 @@
 "use client"
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 
-export default function GameList({ games }) {
-    const [gameStates, setGameStates] = useState(games);
-
+export default function GameList({ games, lastDocId }) {
     const handleInputChange = (id, field, value) => {
-        setGameStates((prevState) =>
-            prevState.map((game) =>
-                game.id === id ? { ...game, [field]: value } : game
-            )
+        // Update the value in the local `games` array
+        const updatedGames = games.map((game) =>
+            game.id === id ? { ...game, [field]: value } : game
         );
+        // Call a function to update the state in the parent component
+        // You would pass this function from AdminPage to update `games`
     };
 
     const handleSave = async (id) => {
-        const game = gameStates.find((game) => game.id === id);
+        const game = games.find((game) => game.id === id);
         try {
             await axios.put(`/api/admin/game`, game);
             alert('Changes saved successfully');
@@ -26,9 +25,9 @@ export default function GameList({ games }) {
 
     return (
         <div className="flex flex-col gap-4 p-4 w-full">
-            {gameStates &&
-                gameStates.map((game) => (
-                    <div key={game.id} className="h-[30vh] w-full flex bg-white rounded-lg shadow-md p-4">
+            {games &&
+                games.map((game, index) => (
+                    <div key={index} className="h-[30vh] w-full flex bg-white rounded-lg shadow-md p-4">
                         <div className="w-[30vw]">
                             <img
                                 src={game.data?.bannerURL}
@@ -72,4 +71,3 @@ export default function GameList({ games }) {
         </div>
     );
 }
-    
