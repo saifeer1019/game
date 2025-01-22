@@ -1,27 +1,24 @@
 'use client';
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 
 export default function SearchBar({ onSearch }) {
-    const [searchParams, setSearchParams] = useState('');
-        // Fetch query from URL
-        useEffect(() => {
-            const queryParams = new URLSearchParams(window.location.search);
-            setSearchParams(queryParams);
-        }, []);
-    
     const [search, setSearch] = useState('');
     const [isFocused, setIsFocused] = useState(false);
     const router = useRouter();
 
-    // Sync search input with URL query parameter
+    // Fetch query from URL on component mount
     useEffect(() => {
-        const queryParam = searchParams.get('query');
-        if (queryParam) {
-            setSearch(queryParam);
+        // Check if window is defined (client-side)
+        if (typeof window !== 'undefined') {
+            const queryParams = new URLSearchParams(window.location.search);
+            const queryParam = queryParams.get('query');
+            if (queryParam) {
+                setSearch(queryParam);
+            }
         }
-    }, [searchParams]);
+    }, []); // Run only on mount
 
     const handleSubmit = (e) => {
         e.preventDefault();

@@ -9,6 +9,17 @@ import Gallery from "@/components/Gallery";
 import Footer from '@/components/Footer';
 import axios from 'axios';
 
+
+
+
+
+
+
+
+
+
+
+
 const LottieAnimation = dynamic(() => import('@/components/LottieAnimation'), { ssr: false });
 import bubblesAnimation from "../lottie.json";
 
@@ -16,7 +27,7 @@ export default function SearchPage() {
     const router = useRouter();
 
 
-    const [searchParams, setSearchParams] = useState('');
+    const [searchParams, setSearchParams] = useState(null);
         // Fetch query from URL
         useEffect(() => {
             const queryParams = new URLSearchParams(window.location.search);
