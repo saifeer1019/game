@@ -1,6 +1,6 @@
 {
     "crons": [{
-      "path": "/api/fields",
+      "path": "/api/game/fields",
       "schedule": "0 10 * * *"
     }]
   }
