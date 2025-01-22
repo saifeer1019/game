@@ -11,9 +11,11 @@ import FeaturedContent from '@/components/FeaturedContent';
 import Carousel from '@/components/gamePage/Carousel';
 import Filter from '@/components/widgets/Filter';
 import { dummyGames } from '@/components/DummyGames';
-import { Eye, ChevronRight } from 'lucide-react';
+import { Eye, ChevronRight, View } from 'lucide-react';
 import Footer from '@/components/Footer';
 import Trending from '@/components/widgets/Trending';
+import ViewMore from '@/components/widgets/ViewMore';
+import ViewAll from '@/components/widgets/ViewAll';
 const LottieAnimation = dynamic(() => import('@/components/LottieAnimation'), { ssr: false });
 
 import bubblesAnimation from "./lottie.json"; // Path to your Lottie JSON file
@@ -87,16 +89,13 @@ if (loading) {
                 Most Voted 
               </h1>
               <div className='hidden sm:block'>
-              <button className="flex items-center gap-x-1 border border-light_ px-2 py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
-                <Eye className="w-4 h-4 sm:w-4 sm:h-4" />
-                <span>View All</span>
-              </button>
+              <ViewAll />
 
               </div>
             </div>
 
             <div className="w-full">
-              <Gallery games={games.trending} />
+              <Gallery games={games.mostViewed} />
             </div>
           </div>
 
@@ -121,11 +120,7 @@ if (loading) {
               </div>
             <GalleryPills games={games.sandbox} />
 
-            <button className="flex items-center w-fit tracking-wide sm:mt-2 gap-x-1  py-1 text-light_ text-lg sm:text-base hover:bg-cyan-500/10 transition-colors">
-            
-            <span>View more</span>
-            <ChevronRight className="self-center w-4 h-4 sm:w-4 sm:h-4" />
-          </button>
+            <ViewMore/>
          
             </div>
 
@@ -140,12 +135,7 @@ if (loading) {
       
         </div>
         <GalleryPills games={games.twoDGame} />
-
-      <button className="flex items-center w-fit tracking-wide mt-2 gap-x-1  py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
-      
-      <span>View more</span>
-      <ChevronRight className="self-center w-4 h-4 sm:w-4 sm:h-4" />
-    </button>
+        <ViewMore/>
    
       </div>
 
@@ -161,12 +151,7 @@ if (loading) {
         </div>
         <GalleryPills games={games.threDCG} />
 
-      <button className="flex items-center w-fit tracking-wide sm:mt-2 gap-x-1  py-1 text-light_ text-base hover:bg-cyan-500/10 transition-colors">
-      
-      <span>View more</span>
-      <ChevronRight className="self-center w-4 h-4 sm:w-4 sm:h-4" />
-    </button>
-   
+        <ViewMore/>
       </div>
 
       
@@ -181,11 +166,7 @@ if (loading) {
         </div>
         <GalleryPills games={games.voyeurism} />
 
-      <button className="flex items-center w-fit tracking-wide sm:mt-2 gap-x-1  py-1 text-light_ text-base hover:bg-cyan-500/10 transition-colors">
-      
-      <span>View more</span>
-      <ChevronRight className="self-center w-4 h-4 sm:w-4 sm:h-4" />
-    </button>
+        <ViewMore/>
    
       </div>
 
@@ -202,20 +183,15 @@ if (loading) {
                 Popular
               </h1>
               <div className='hidden sm:block'>
-              <button className="flex items-center gap-x-1 border border-light_ px-2 py-1 text-light_ text-sm sm:text-base hover:bg-cyan-500/10 transition-colors">
-                <Eye className="w-4 h-4 sm:w-4 sm:h-4" />
-                <span>View All</span>
-              </button>
+              <ViewAll />
 
               </div>
             </div>
 
             <div className="w-full">
-            <Gallery games={games.trending} />
+            <Gallery games={games.popular} />
             </div>
-            <div className="w-full">
-            <Gallery games={games.trending} />
-          </div>
+         
           </div>
         </div>
       </div>

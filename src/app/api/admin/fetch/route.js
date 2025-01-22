@@ -57,6 +57,7 @@ export async function POST(request) {
         console.log(`Game with id ${id} does not exist`);
         continue;
       }
+      
 
       // Generate search-related fields
       const gameName = response.data.data?.gameName || '';

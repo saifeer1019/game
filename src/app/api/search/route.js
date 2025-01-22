@@ -12,6 +12,9 @@ import {
   orderBy
 } from "firebase/firestore";
 
+
+
+
 export async function GET(request) {
   const url = new URL(request.url);
   let searchQuery = url.searchParams.get("query") || "";
@@ -21,6 +24,7 @@ export async function GET(request) {
   const rating = url.searchParams.get("rating") || "";
   const genre = (url.searchParams.get("genre") || "").toLowerCase();
   const tags = (url.searchParams.get("tags") || "").toLowerCase();
+  
   const sortOrder = url.searchParams.get("sortOrder") || "";
 
   if (searchQuery === "all") {
@@ -86,13 +90,21 @@ export async function GET(request) {
 
       // Operating System query
       if (operatingSystem) {
-        queryConstraints = [
-          where("data.operatingSystem", "array-contains", operatingSystem),
-          ...queryConstraints.filter(constraint => 
-            !(constraint instanceof Function && constraint.name === 'where')
-          )
-        ];
+        console.log("Operating system query");
+       
+        queryConstraints = [where("data.operatingSystem", "array-contains", operatingSystem)];
+   
         
+      if (lastDocId) {
+        const lastDocRef = doc(db, "games", lastDocId);
+        const lastDocSnapshot = await getDoc(lastDocRef);
+        if (lastDocSnapshot.exists()) {
+          queryConstraints.push(startAfter(lastDocSnapshot));
+        }
+      }
+      queryConstraints.push(limit(pageSize));
+
+
         finalQuery = query(gamesCollectionRef, ...queryConstraints);
         querySnapshot = await getDocs(finalQuery);
         games_two = querySnapshot.docs.map(doc => ({
@@ -102,15 +114,22 @@ export async function GET(request) {
         }));
       }
 
+      console.log("games_two length:", games_two.length);
+
       // Genre query
       if (genre) {
         queryConstraints = [
-          where("data.genre", "array-contains", genre),
-          ...queryConstraints.filter(constraint => 
-            !(constraint instanceof Function && constraint.name === 'where')
-          )
-        ];
+          where("data.genre", "array-contains", genre)];
         
+
+          if (lastDocId) {
+            const lastDocRef = doc(db, "games", lastDocId);
+            const lastDocSnapshot = await getDoc(lastDocRef);
+            if (lastDocSnapshot.exists()) {
+              queryConstraints.push(startAfter(lastDocSnapshot));
+            }
+          }
+          queryConstraints.push(limit(pageSize));
         finalQuery = query(gamesCollectionRef, ...queryConstraints);
         querySnapshot = await getDocs(finalQuery);
         games_three = querySnapshot.docs.map(doc => ({
@@ -123,12 +142,16 @@ export async function GET(request) {
       // Tags query
       if (tags) {
         queryConstraints = [
-          where("data.tags", "array-contains", tags),
-          ...queryConstraints.filter(constraint => 
-            !(constraint instanceof Function && constraint.name === 'where')
-          )
-        ];
-        
+          where("data.tags", "array-contains", tags)];
+          if (lastDocId) {
+            const lastDocRef = doc(db, "games", lastDocId);
+            const lastDocSnapshot = await getDoc(lastDocRef);
+            if (lastDocSnapshot.exists()) {
+              queryConstraints.push(startAfter(lastDocSnapshot));
+            }
+          }
+          queryConstraints.push(limit(pageSize));
+
         finalQuery = query(gamesCollectionRef, ...queryConstraints);
         querySnapshot = await getDocs(finalQuery);
         games_four = querySnapshot.docs.map(doc => ({
@@ -138,11 +161,19 @@ export async function GET(request) {
         }));
       }
 
+
+      
       // Combine and deduplicate results
       let combinedResults = [...games_one, ...games_two, ...games_three, ...games_four];
+
+       
       let games = Array.from(new Set(combinedResults.map(doc => doc.id)))
         .map(id => combinedResults.find(doc => doc.id === id));
-
+        if (tags || genre || operatingSystem) {
+          combinedResults = [ ...games_two, ...games_three, ...games_four];
+          games = Array.from(new Set(combinedResults.map(doc => doc.id)))
+        .map(id => combinedResults.find(doc => doc.id === id));}
+       
      
       return {
         games,
@@ -155,7 +186,7 @@ export async function GET(request) {
     
     // Execute second search if needed
     console.log(`Search result length: ${searchResult.games.length}`);
-    while (searchResult.games.length < 12 && searchResult.games.length !== 0) {
+    while (searchResult.games.length < 12 && searchResult.games.length !== 0 ) {
       const secondSearchResult = await search(searchResult.lastVisibleId);
       searchResult.games = [...searchResult.games, ...secondSearchResult.games];
       searchResult.lastVisibleId = secondSearchResult.lastVisibleId;

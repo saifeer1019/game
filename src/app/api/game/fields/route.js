@@ -1,49 +1,48 @@
-import { collection, getDocs, writeBatch, query } from "firebase/firestore";
+import { collection, getDocs, writeBatch, query, orderBy } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  try {
+    // Get a reference to your collection
+    const collectionRef = collection(db, "games");
 
-
-    try {
-          // Get a reference to your collection
-          const collectionRef = collection(db, "games");
+    async function sync(parameter, field, size) {
+      // Create the query with proper orderBy
+      const gamesQuery = query(collectionRef, orderBy(parameter, "desc"));
+      const querySnapshot = await getDocs(gamesQuery);
       
-          // Fetch all documents in the collection
-          const querySnapshot = await getDocs(collectionRef);
-
-                // Fetch all documents sorted by rating in descending order
-                // const gamesQuery = query(collectionRef, orderBy("rating", "desc"));
-                // const querySnapshot = await getDocs(gamesQuery);
-                  
-          // Initialize a batch
-          const batch = writeBatch(db);
+      // Initialize a batch
+      const batch = writeBatch(db);
       
-          // Counter to track top 8 games
-        //  let count = 0;
-
-                // Loop through documents
-      // querySnapshot.forEach((doc) => {
-      //   const docRef = doc.ref;
-
-        // Set `mostRated: true` for top 8, and `mostRated: false` for the rest
-        // batch.update(docRef, {
-        //   mostRated: count < 8, // true for top 8 games
-        // });
-
-      //   count++;
-      // });
-          // Loop through documents and add the `featured` field
-          querySnapshot.forEach((doc) => {
-            const docRef = doc.ref;
-            batch.update(docRef, { views:0 });
-          });
+      // Counter to track games
+      let count = 0;
       
-        // Commit the batch
-        await batch.commit();
-        return NextResponse.json({ message: "Games added successfully" });
-        console.log("Field `featured` added to all documents successfully.");
-      } catch (error) {
-        console.error("Error updating documents:", error);
-      }
+      // Loop through documents
+      querySnapshot.forEach((doc) => {
+        const docRef = doc.ref;
+        
+        // Using dynamic field name in the update object
+        const updateData = {
+          [field]: count < size  // This is the fix - using computed property name
+        };
+        
+        batch.update(docRef, updateData);
+        count++;
+      });
+      
+      // Commit the batch
+      await batch.commit();
     }
+
+    // Execute updates for different parameters and fields
+    await sync("data.rating", "mostRated", 8);
+    await sync("views", "trending", 10);
+    await sync("views", "popular", 12);
+
+    return NextResponse.json({ message: "Games synced" });
+  } catch (error) {
+    console.error("Error updating documents:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}

@@ -24,8 +24,8 @@ export async function GET() {
     const [sandbox, threDCG, voyeurism, twoDGame] = await Promise.all([
       fetchGamesByGenre("Sandbox"),
       fetchGamesByGenre("3DCG"),
-      fetchGamesByGenre("Voyeurism"),
-      fetchGamesByGenre("2D Game"),
+      fetchGamesByGenre("3DCG"),
+      fetchGamesByGenre("Sandbox"),
     ]);
 
 
@@ -34,7 +34,7 @@ export async function GET() {
         fetchGamesByCategory("featured"),
         fetchGamesByCategory("trending"),
         fetchGamesByCategory("popular"),
-        fetchGamesByCategory("mostViewed"),
+        fetchGamesByCategory("mostRated"),
       ]);
 
     

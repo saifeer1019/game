@@ -43,22 +43,50 @@ export default function Fetch() {
          <div className="flex flex-row flex-1 h-screen overflow-hidden bg-primary_ ">
           
          <Sidebar currentTab="admin" />
-      <div className="p-4 flex flex-col w-full h-screen justify-center items-center">
-    { !fetching && <div className="p-4  self-center justify-self-center">
+      <div className="p-4 flex flex-col w-full h-screen justify-start items-start mt-20">
+
+
+    { !fetching && !fetched && <div className="p-4  ">
+
+      <h1 className="text-2xl text-gray-400 mb-4">Fetch Games</h1>
         <input type="file" accept=".json" onChange={handleFileUpload} />
         <Button className="bg-gray-300 px-2 py-1 rounded" onClick={handleFetch} disabled={gameIds.length === 0}>
           Fetch Games
         </Button>
         </div>}
 
-        {fetching && <p className="text-lg text-gray-400 self-center justify-self-center">Fetching games. Please wait...</p>}
-        {fetched && <div className="">
+        {fetching && <p className="text-lg text-gray-400 ">Fetching games. It might take a while.... Please do not close tab...</p>}
+        {fetched && <div className="text-lg text-gray-400 ">
           Successfully fetched games
           
           </div>
         }
+
+        <div className="p-4  ">
+
+        <h1 className="text-2xl text-gray-400 mb-4">Sync Game Charts</h1>
       
-        </div>
+          <Button className="bg-gray-300 px-2 py-1 rounded" onClick={handleFetch} disabled={gameIds.length === 0}>
+          Sync
+          </Button>
+         
+  
+         
+            </div>
+
+           
+             
+      
+             
+                </div>
+          
+    
+
+
+
+
+      
+     
         </div>
     </div>
   );
