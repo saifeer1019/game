@@ -64,7 +64,7 @@ export default function Fetch() {
 
       <h1 className="text-2xl text-gray-400 mb-4">Fetch Games</h1>
         <input type="file" accept=".json" onChange={handleFileUpload} />
-        <Button className="bg-gray-300 px-2 py-1 rounded" onClick={handleFetch} disabled={gameIds.length === 0}>
+        <Button className="bg-gray-300 px-2 py-1 rounded" onClick={handleFetch}>
           Fetch Games
         </Button>
         <p className="text-base text-gray-400 ">Please use the format like [48357, 28347, 98237]</p>
