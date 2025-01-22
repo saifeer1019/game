@@ -21,6 +21,10 @@ import bubblesAnimation from "./lottie.json"; // Path to your Lottie JSON file
 
 import CarouselMobile from '@/components/widgets/CarouselMobile';
 export default function Home() {
+
+  //ads
+
+  
   const [games, setGames] = useState([])
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -62,7 +66,7 @@ if (loading) {
       <Navbar />
 
       <div className="flex flex-col items-start justify-center mt-4 sm:mt-8 md:mt-14">
-        <div className="w-full px-4 sm:px-0 md:px-0">
+        <div className="w-full px-0 sm:px-0 md:px-0">
           <div className="w-full hidden sm:block px-4 sm:px-0">
            <Carousel slides={games.featured} />
           </div>

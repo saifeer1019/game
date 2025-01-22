@@ -1,17 +1,30 @@
 'use client';
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
+    const searchParams = useSearchParams();
     const [search, setSearch] = useState('');
     const [isFocused, setIsFocused] = useState(false);
     const router = useRouter();
 
+    // Sync search input with URL query parameter
+    useEffect(() => {
+        const queryParam = searchParams.get('query');
+        if (queryParam) {
+            setSearch(queryParam);
+        }
+    }, [searchParams]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (search.trim()) {
-            router.push(`/search?query=${encodeURIComponent(search.trim())}`);
+            if (onSearch) {
+                onSearch(search.trim());
+            } else {
+                router.push(`/search?query=${encodeURIComponent(search.trim())}`);
+            }
         }
     };
 

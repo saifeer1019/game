@@ -15,7 +15,7 @@ export default function Gallery({slice = 8, heading, games}) {
   return (
     <div className="w-full  sm:px-6 md:px-8 md:mb-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  md:gap-6">
-        {games && games.slice(0, slice).map((game, index) => (
+        {games && games.map((game, index) => (
           <motion.div
             key={index}
             onClick={() => window.location.href = `/game/${game.id}`}

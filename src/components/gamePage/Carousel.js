@@ -125,7 +125,7 @@ const Carousel = ({slides}) => {
           </div>*/}
               </div>
             <p className="Bebas_Neue text-sm md:text-base w-[80%] text-neutral-300 mb-4 leading-relaxed">
-              {slide.data.overview.slice(0, 180)}
+              {slide.data.overview.slice(0, 300)}
             </p>
           </div>
   
@@ -146,7 +146,7 @@ const Carousel = ({slides}) => {
           </div>
         </div>
 
-            <div className="absolute right-0 w-full md:w-9/12 h-[300px] md:h-full rounded-lg bg-primary_ overflow-hidden z-10">
+            <div className="absolute right-0 w-full md:w-[70%] h-[300px] md:h-full rounded-lg bg-primary_ overflow-hidden z-10">
             <div 
             className="absolute inset-0 z-20"
             style={{

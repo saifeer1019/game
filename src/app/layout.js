@@ -48,6 +48,16 @@ export default function RootLayout({ children }) {
         ${robotoCondensed.variable}
       `}
     >
+    
+    
+    
+    <head>
+        {/* Google AdSense Script */}
+        <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+      ></script>
+    </head>
       <body>
         {children}
       </body>

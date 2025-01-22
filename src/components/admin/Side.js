@@ -9,16 +9,16 @@ export default function Sidebar() {
   const pathname = usePathname(); // Ensure this works with `use client`
 
   const navItems = [
-    { name: "Games", path: "/admin" },
-    { name: "Fetch", path: "/admin/fetch" },
-    { name: "Sections", path: "/admin/sections" },
+    { name: "My Games", path: "/admin" },
+    { name: "Fetch Games", path: "/admin/fetch" },
+
   ];
 
   return (
     <div
       className={`${
         isOpen ? "w-64" : "w-16"
-      } h-screen bg-primary_ text-light_ transition-all duration-300`}
+      } h-full bg-primary_ text-light_ transition-all duration-300 mt-14`}
     >
       {/* Toggle Button */}
       <button

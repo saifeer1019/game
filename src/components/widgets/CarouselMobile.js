@@ -42,14 +42,14 @@ const CarouselMobile = ({slides}) => {
       >
         {slides && slides.map((slide, index) => (
           <div key={index} className="min-w-full h-full relative">
-            <div className="z-20 absolute bottom-0 left-0 mx-2 w-[50vw] flex flex-col justify-between">
+            <div className="z-40 absolute bottom-0 left-0 mx-2 w-[50vw] flex flex-col justify-between">
               <div>
-                <h1 className="text-2xl font-bold mb-2 text-light_">
+                <h1 className="text-2xl font-bold mb-2 ml-1 text-light_">
                 {slide.data.gameName}
                 </h1>
               </div>
               
-              <div className="space-y-4 my-2">
+              <div className="space-y-4  mb-10">
                 <button 
                   className="w-fit rounded-full py-2 px-4 bg-accent_ text-primary_ 
                            flex items-center justify-center gap-1 text-sm hover:bg-hover_ transition-colors"
@@ -64,6 +64,34 @@ const CarouselMobile = ({slides}) => {
             </div>
 
             <div className="absolute w-full h-full">
+
+            <div 
+            className="absolute inset-0 z-20"
+            style={{
+              background: 'linear-gradient(to right, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 30%, transparent 100%)'
+          }}
+          />
+      
+          <div 
+          className="absolute inset-0 z-20"
+          style={{
+            background: 'linear-gradient(to left, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17,0.8) 5%,   rgba(36, 36, 40, 0.1) 40%, transparent 100%)'
+          }}
+        />
+      
+        <div 
+        className="absolute inset-0 z-20"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 10%, rgba(17, 17, 17, 0.4) 25%, rgba(17, 17, 17, 0.1) 35%, transparent 100%)'
+        }}
+      />
+      
+      <div 
+      className="absolute inset-0 z-20"
+      style={{
+        background: 'linear-gradient(to top, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 5%, rgba(17, 17, 17, 0.1) 40%, transparent 100%)'
+      }}
+      />
               <Image
                 src={slide.data.bannerURL}
                 alt={slide.data.gameNme}

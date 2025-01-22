@@ -4,6 +4,7 @@ import Sidebar from "@/components/admin/Side";
 import { Button } from "@headlessui/react";
 import { useState } from "react";
 import axios from "axios";
+import Navbar from "@/components/Navbar";
 
 
 export default function Fetch() {
@@ -36,8 +37,12 @@ export default function Fetch() {
   };
 
   return (
-    <div className="flex flex-row h-screen">
-      <Sidebar currentTab={currentTab} setCurrentTab={setCurrentTab} />
+   <div className="flex flex-col h-screen w-full overflow-hidden bg-primary_">
+       <Navbar />
+         
+         <div className="flex flex-row flex-1 h-screen overflow-hidden bg-primary_ ">
+          
+         <Sidebar currentTab="admin" />
       <div className="p-4 flex flex-col w-full h-screen justify-center items-center">
     { !fetching && <div className="p-4  self-center justify-self-center">
         <input type="file" accept=".json" onChange={handleFileUpload} />
@@ -53,6 +58,7 @@ export default function Fetch() {
           </div>
         }
       
+        </div>
         </div>
     </div>
   );
