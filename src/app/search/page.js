@@ -14,8 +14,23 @@ import bubblesAnimation from "../lottie.json";
 
 export default function SearchPage() {
     const router = useRouter();
-    const searchParams = useSearchParams();
+
+
+    const [searchParams, setSearchParams] = useState('');
+        // Fetch query from URL
+        useEffect(() => {
+            const queryParams = new URLSearchParams(window.location.search);
+            setSearchParams(queryParams);
+        }, []);
     
+        // Sync search input with URL query parameter
+    useEffect(() => {
+        const queryParam = searchParams.get('query');
+        if (queryParam) {
+            setSearch(queryParam);
+        }
+    }, [searchParams]);
+
     // State management
     const [searchState, setSearchState] = useState({
         query: '',

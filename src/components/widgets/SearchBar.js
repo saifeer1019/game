@@ -4,7 +4,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 
 export default function SearchBar({ onSearch }) {
-    const searchParams = useSearchParams();
+    const [searchParams, setSearchParams] = useState('');
+        // Fetch query from URL
+        useEffect(() => {
+            const queryParams = new URLSearchParams(window.location.search);
+            setSearchParams(queryParams);
+        }, []);
+    
     const [search, setSearch] = useState('');
     const [isFocused, setIsFocused] = useState(false);
     const router = useRouter();

@@ -1,10 +1,10 @@
 "use client"
-import GameManager from "@/components/GameManager";
+
 import Sidebar from "@/components/admin/Side";
 import { Button } from "@headlessui/react";
 import { useState } from "react";
 import axios from "axios";
-import Navbar from "@/components/Navbar";
+
 
 
 export default function Fetch() {
@@ -38,7 +38,7 @@ export default function Fetch() {
 
   return (
    <div className="flex flex-col h-screen w-full overflow-hidden bg-primary_">
-       <Navbar />
+  
          
          <div className="flex flex-row flex-1 h-screen overflow-hidden bg-primary_ ">
           
