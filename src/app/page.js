@@ -29,17 +29,56 @@ export default function Home() {
   
   const [games, setGames] = useState([])
   const [loading, setLoading] = useState(true);
+
+  const storeWithExpiry = (key, value, ttl) => {
+    const now = new Date();
+    const item = {
+      value: value,
+      expiry: now.getTime() + ttl
+    };
+    localStorage.setItem(key, JSON.stringify(item));
+  };
+  
+  const getWithExpiry = (key) => {
+    const itemStr = localStorage.getItem(key);
+    if (!itemStr) return null;
+  
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+  
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key);
+      return null;
+    }
+  
+    return item.value;
+  };
   useEffect(() => {
     const fetchGames = async () => {
             try {
-                    const response = await axios.get(`/api/games`, {
-                            params: {
-                                    limit: 5
-                            },
-                          
-                    });
-                    setGames(response.data);
-                    setLoading(false);
+
+                  const cachedGameData = getWithExpiry('gameData');
+                    if (cachedGameData){
+                      setGames(cachedGameData);
+                      setLoading(false);
+                    }
+                    else {
+                      const response = await axios.get(`/api/games`, {
+                        params: {
+                                limit: 5
+                        },
+                      
+                });
+                
+                setGames(response.data);
+                
+                setLoading(false);
+                // Storing game data
+
+                storeWithExpiry('gameData', response.data, 24 * 60 * 60 * 1000);
+
+                    }
+                
             } catch (error) {
                     console.error('Error:', error);
             }

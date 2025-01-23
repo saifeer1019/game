@@ -18,7 +18,7 @@ export async function GET(request) {
     gamesCollectionRef,
     where("data.genre", "array-contains", genre_), // Use `array-contains` for array fields
     orderBy("data.rating", "desc"), // Sort by rating in descending order
-    limit(6) // Limit to 6 results
+    limit(8) // Limit to 6 results
   );
 
   try {

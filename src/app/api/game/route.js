@@ -4,10 +4,10 @@ import {collection, getDocs, updateDoc, query, where } from "firebase/firestore"
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  const id_ = searchParams.get("id");
+  const slug_ = searchParams.get("slug");
   const gamesCollectionRef = collection(db, "games");
   // Reference to the game document
-  const gameQuery = query(gamesCollectionRef, where("id", "==", id_));
+  const gameQuery = query(gamesCollectionRef, where("slug", "==", slug_));
 
   try {
     // Fetch the game documents

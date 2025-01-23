@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import SearchBar from "@/components/widgets/SearchBar";
 import Navbar from "@/components/Navbar";
@@ -9,39 +9,12 @@ import Gallery from "@/components/Gallery";
 import Footer from '@/components/Footer';
 import axios from 'axios';
 
-
-
-
-
-
-
-
-
-
-
-
 const LottieAnimation = dynamic(() => import('@/components/LottieAnimation'), { ssr: false });
 import bubblesAnimation from "../lottie.json";
 
 export default function SearchPage() {
     const router = useRouter();
-
-
-    const [searchParams, setSearchParams] = useState(null);
-        // Fetch query from URL
-        useEffect(() => {
-            const queryParams = new URLSearchParams(window.location.search);
-            setSearchParams(queryParams);
-        }, []);
     
-        // Sync search input with URL query parameter
-    useEffect(() => {
-        const queryParam = searchParams.get('query');
-        if (queryParam) {
-            setSearch(queryParam);
-        }
-    }, [searchParams]);
-
     // State management
     const [searchState, setSearchState] = useState({
         query: '',
@@ -70,10 +43,12 @@ export default function SearchPage() {
 
     // Update search state from URL parameters
     useEffect(() => {
-        const query = searchParams.get('query') || '';
-        const tag = searchParams.get('tag') || '';
-        const developer = searchParams.get('developer') || '';
-        const genre = searchParams.get('genre') || '';
+        // Use window.location instead of useSearchParams
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('query') || '';
+        const tag = urlParams.get('tag') || '';
+        const developer = urlParams.get('developer') || '';
+        const genre = urlParams.get('genre') || '';
 
         setSearchState({
             query,
@@ -89,7 +64,7 @@ export default function SearchPage() {
             developer: developer || prev.developer,
             genre: genre || prev.genre,
         }));
-    }, [searchParams]);
+    }, [window.location.search]); // Dependency on search string changes
 
     // Function to construct search parameters
     const constructSearchParams = (lastDocId = null) => {
@@ -104,7 +79,7 @@ export default function SearchPage() {
             genre: filters.genre || genre, // Prioritize filter selection
             tags: filters.tags || tag, // Prioritize filter selection
             sortOrder,
-            limit: 12,
+            limit: 100,
             lastDocId,
         };
     };

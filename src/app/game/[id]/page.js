@@ -12,8 +12,10 @@ import Footer from '@/components/Footer';
 import LottieAnimation from "@/components/LottieAnimation";
 import bubblesAnimation from "../lottie.json"; // Path to your Lottie JSON file
 import Gallery from "@/components/gamePage/Gallery";
+import ScreenshotGallery from "@/components/gamePage/ScreenShotsGallery";
 const GamePage = () => {
-    const { id } = useParams();
+    const {id} = useParams();
+    console.log(id)
   const [game, setGame] = useState();
   const [relatedGames, setRelatedGames] = useState();
   const [activeTab, setActiveTab] = useState('overview');
@@ -21,7 +23,7 @@ const GamePage = () => {
   useEffect(() => {
     const fetchGame = async () => {
             try {
-                    let response = await axios.get(`/api/game?id=${id}`);
+                    let response = await axios.get(`/api/game?slug=${id}`);
                     setGame(response.data);
 
                     let response_ = await axios.get(`/api/relatedGames?genre=${`Sandbox`}`);
@@ -50,8 +52,8 @@ const GamePage = () => {
     <div className="min-h-screen bg-primary_ text-light_">
     <Navbar />
       {/* Hero Section */}
-      <div className="w-full bg-secondary_ pl-4 pb-4 pr-4 pt-20 md:pl-8 md:pr-8 md:pt-22 md:pb-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+      <div className="w-full    bg-secondary_  pb-4 pt-20 md:pt-22 md:pb-8">
+        <div className="mx-auto max-w-[90vw] flex flex-col md:flex-row gap-6">
           {/* Banner Image */}
           <div className="md:w-1/3 flex flex-col gap-4">
             <div className="relative aspect-[20/11] w-full rounded-lg overflow-hidden">
@@ -235,7 +237,7 @@ const GamePage = () => {
 
 
                                   {/* Screenshots */}
-        <div>
+       {/* <div>
         <h2 className="text-2xl font-bold mb-4">Screenshots</h2>
         <div className="grid grid-cols-2 md:grid-cols-3  gap-4">
           {game.data.images.slice(0, 8).map((image) => (
@@ -250,18 +252,25 @@ const GamePage = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div>*/}
 
-               {relatedGames && (       <h1 className="text-xl w-full pt-4 text-light_ sm:text-lg  font-roboto font-semibold">
-             More games like this
-          </h1>)}
-              <Gallery games={relatedGames} slice={6} heading="Related Games" flex='side' />
-                  
+      <ScreenshotGallery images={game.data.images} />
 
+       
 
 
           </div>
+
+          
         </div>
+        <div className="max-w-[90vw] mx-auto mt-8">
+        {relatedGames && (       <h1 className="text-xl w-full pt-4 md:mt-10 mb-4 text-light_ sm:text-2xl  sm:font-bold font-roboto font-semibold">
+          More games like this
+       </h1>)}
+           <Gallery games={relatedGames} slice={8} heading="Related Games" flex='side' />
+          
+           </div>
+     
       </div>
 
       {/* Details Section */}
@@ -271,12 +280,14 @@ const GamePage = () => {
         {/* Game Details */}
         <div className="grid md:grid-cols-2 gap-8">
        
-
-
+        
        
         </div>
+        
       </div>
+      
       <Footer />
+     
     </div>
   );
 };

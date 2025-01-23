@@ -61,6 +61,20 @@ export async function POST(request) {
 
       // Generate search-related fields
       const gameName = response.data.data?.gameName || '';
+
+      //slug
+      const generateSlug = (z) => {
+        return z
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')  // Replace non-alphanumeric with dash
+          .replace(/^-|-$/g, '')  // Remove leading/trailing dashes
+          .slice(0, 50);  // Limit length
+      };
+      
+      // Usage in add game API
+      const slug = generateSlug(gameName);
+
+
       const searchFields = {
         searchableGameName: gameName.toLowerCase(), // For direct comparisons
         gameNameKeywords: generateKeywords(gameName), // For partial word matching
@@ -70,6 +84,7 @@ export async function POST(request) {
       await addDoc(gamesCollection, { 
         ...response.data, 
         ...searchFields,
+        slug: slug,
         featured: false, 
         trending: false, 
         popular: false, 
