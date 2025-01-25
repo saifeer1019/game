@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { Trash2, Save, Star, TrendingUp, Award, Zap } from 'lucide-react';
+import Image from 'next/image';
 
 export default function GameList({ games, setGames, lastDocId }) {
     const [changed, setChanged] = useState(false);
@@ -54,13 +55,15 @@ export default function GameList({ games, setGames, lastDocId }) {
                     key={index} 
                     className="flex bg-[#161618] rounded-lg shadow-md p-4 min-h-[240px] border border-[#7c7f87]/20"
                 >
-                    <div className="w-[30%] max-w-[300px]">
-                        <img
-                            src={game.data?.bannerURL}
-                            alt={game.data?.gameName}
-                            className="h-full w-full object-cover rounded-lg"
-                        />
-                    </div>
+                <div className="w-[30%] max-w-[300px] relative">
+                <Image
+                  src={game.data?.bannerURL}
+                  alt={game.data?.gameName}
+                  className="object-cover rounded-lg"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
                     <div className="flex justify-between items-start flex-1 gap-4 p-4">
                         <div className="flex flex-col gap-3">
                             <h2 className="text-xl font-bold text-[#e4e4e7]">{game.data?.gameName}</h2>

@@ -7,7 +7,9 @@ const Carousel = ({ slides }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef(null);
   const autoSlideRef = useRef(null);
-  const hammerRef = useRef(null); // Ref to store Hammer instance
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const isDragging = useRef(false); // Track whether the user is dragging
 
   // Start auto-slide
   const startAutoSlide = () => {
@@ -17,40 +19,32 @@ const Carousel = ({ slides }) => {
     }, 10000);
   };
 
-  // Initialize Hammer.js for swipe gestures
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
+  // Handle touch/mouse start
+  const handleStart = (clientX) => {
+    touchStartX.current = clientX;
+    isDragging.current = true;
+  };
 
-    // Dynamically import Hammer.js
-    import("hammerjs").then(({ default: Hammer }) => {
-      const hammer = new Hammer(carousel, {
-        recognizers: [
-          [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }],
-        ],
-        touchAction: 'pan-y', // Allow vertical scrolling
-        inputClass: Hammer.TouchInput, // Use touch input only
-      });
+  // Handle touch/mouse move
+  const handleMove = (clientX) => {
+    if (!isDragging.current) return;
+    touchEndX.current = clientX;
+  };
 
-      // Store Hammer instance in ref
-      hammerRef.current = hammer;
+  // Handle touch/mouse end
+  const handleEnd = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
 
-      // Handle swipe left (next slide)
-      hammer.on("swipeleft", () => {
-        setCurrentSlide(prev => (prev + 1) % slides.length);
-      });
+    const diffX = touchStartX.current - touchEndX.current;
+    const threshold = 50; // Minimum swipe distance to trigger slide change
 
-      // Handle swipe right (previous slide)
-      hammer.on("swiperight", () => {
-        setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
-      });
-    });
-
-    // Cleanup Hammer.js on unmount
-    return () => {
-      if (hammerRef.current) hammerRef.current.destroy(); // Use the ref to access Hammer instance
-    };
-  }, [slides.length]);
+    if (diffX > threshold && currentSlide < slides.length - 1) {
+      setCurrentSlide(prev => prev + 1); // Swipe left (next slide)
+    } else if (diffX < -threshold && currentSlide > 0) {
+      setCurrentSlide(prev => prev - 1); // Swipe right (previous slide)
+    }
+  };
 
   // Start auto-slide on mount and cleanup on unmount
   useEffect(() => {
@@ -104,6 +98,15 @@ const Carousel = ({ slides }) => {
           transform: `translateX(-${currentSlide * 100}%)`,
           touchAction: "pan-y", // Ensure touch events are not blocked
         }}
+        // Touch events
+        onTouchStart={(e) => handleStart(e.touches[0].clientX)}
+        onTouchMove={(e) => handleMove(e.touches[0].clientX)}
+        onTouchEnd={handleEnd}
+        // Mouse events
+        onMouseDown={(e) => handleStart(e.clientX)}
+        onMouseMove={(e) => handleMove(e.clientX)}
+        onMouseUp={handleEnd}
+        onMouseLeave={handleEnd} // Handle case where mouse leaves the carousel
       >
         {slides && slides.map((slide, index) => (
           <div 

@@ -40,7 +40,7 @@ export default function Trending({games}) {
 
       <div className="overflow-hidden relative">
         <motion.div
-          className="flex gap-8"
+          className="flex gap-4"
           initial={false}
           animate={{ x: `-${(currentIndex * 100) / cardsToShow}%` }}
           transition={{ duration: 0.5 }}
@@ -53,8 +53,8 @@ export default function Trending({games}) {
               onClick={() => router.push(`/game/${game.slug}`)}
             >
             
-              <div className="bg-secondary_ rounded-lg overflow-hidden shadow-lg">
-                <div className="relative aspect-[3/4] sm:h-[35vh]">
+              <div className="bg-secondary_ rounded-lg overflow-hidden shadow-lg items-center">
+                <div className="relative aspect-[3/4] sm:h-[35vh] mx-auto">
                   <Image
                     src={game.data.bannerURL}
                     placeholder="blur"
@@ -65,7 +65,7 @@ export default function Trending({games}) {
                   />
                 </div>
                 <div className="mt-2 flex justify-start items-center gap-2">
-                  <h1 className="text-accent_ text-lg font-extrabold">
+                  <h1 className="text-accent_ text-base font-extrabold">
                     {index < 9 ? "0" : null}
                     {index + 1}
                   </h1>

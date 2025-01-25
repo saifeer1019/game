@@ -105,7 +105,7 @@ if (!game) {
               </div>
               <div>
                 <h3 className="text-muted_">Language</h3>
-                {     game.language.map((z) => (
+                {     game.languages.map((z) => (
 
                     <span onClick={() => window.location.href = `/search?query=all&language=${z}`} key={z} className="px-2 py-1 cursor-pointer bg-secondary_ rounded text-sm">
                     {z}</span>

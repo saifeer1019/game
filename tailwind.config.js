@@ -122,7 +122,7 @@ module.exports = {
                     ...fontFamily.sans
                 ],
 				'coolvetica': ['coolvetica', 'sans-serif'],
-				sans: ['coolvetica', 'ui-sans-serif', 'system-ui'],
+				
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
