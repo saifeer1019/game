@@ -16,7 +16,7 @@ export default function GalleryPills({games}) {
         {games && games.slice(0, 5).map((game, idx) => (
         
           <div
-          onClick={() => window.location.href = `/game/${game.id}`}
+          onClick={() => window.location.href = `/game/${game.slug}`}
            key={idx} className='flex justify-start gap-x-4 hover:bg-cyan-500/10 cursor-pointer border-b-1 py-2 mr-4  border-b-gray-300'>
           <div 
           className="relative overflow-hidden w-14 h-20 " >
