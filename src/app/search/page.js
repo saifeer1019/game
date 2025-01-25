@@ -49,12 +49,14 @@ export default function SearchPage() {
         const tag = urlParams.get('tag') || '';
         const developer = urlParams.get('developer') || '';
         const genre = urlParams.get('genre') || '';
+        const operatingSystem = urlParams.get('operatingSystem') || '';
 
         setSearchState({
             query,
             tag,
             developer,
             genre,
+            operatingSystem
         });
 
         // Update filters based on URL parameters
@@ -187,9 +189,10 @@ export default function SearchPage() {
 const SearchHeader = ({ searchState }) => {
     const { query, tag, developer, genre } = searchState;
     
-    if (query) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for: {query}</h1>;
+    if (query && !tag && !genre && !developer && !operatingSystem) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for: {query}</h1>;
     if (tag) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Tag: {tag}</h1>;
     if (genre) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Genre: {genre}</h1>;
     if (developer) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Developer: {developer}</h1>;
+    if (operatingSystem) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Operating System: {developer}</h1>;
     return null;
 };

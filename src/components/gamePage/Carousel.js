@@ -135,7 +135,7 @@ const Carousel = ({ slides }) => {
               <div className="space-y-4">
                 <button 
                   className="w-full font-semibold rounded-[20px] md:w-auto px-3 mt-4 py-2 bg-accent_ text-light_ flex items-center justify-center gap-1 hover:bg-hover_ transition-colors"
-                  onClick={() => router.push('/game/' + slide.id)}
+                  onClick={() => router.push('/game/' + slide.slug)}
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />

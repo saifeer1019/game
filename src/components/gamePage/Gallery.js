@@ -11,7 +11,7 @@ export default function Gallery({slice = 8, heading, games}) {
  
 
   useEffect(() => {
-    // axios.get('http://localhost:3000/api/games')
+    // axios.get('/api/games')
     //     .then(response => setGames(response.data))
     //     .catch(error => console.error(error));
     console.log('gfgfd');
@@ -25,7 +25,7 @@ export default function Gallery({slice = 8, heading, games}) {
       
       {games && games.slice(0, slice).map((game) => (
           <motion.div
-            onClick={() => window.location.href = `/game/${game.id}`}
+            onClick={() => window.location.href = `/game/${game.slug}`}
             key={game.id}
             className="flex flex-col items-center w-full cursor-pointer"
             whileHover={{
