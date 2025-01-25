@@ -24,4 +24,10 @@
     margin: 0; /* Ensure no margin on body */
     padding: 0; /* Ensure no padding on body */
   }
+  @font-face {
+    font-family: 'coolvetica';
+    src: url('/fonts/Coolvetica Rg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
 }

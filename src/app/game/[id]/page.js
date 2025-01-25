@@ -9,11 +9,11 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import LottieAnimation from "@/components/LottieAnimation";
-import bubblesAnimation from "../lottie.json"; // Path to your Lottie JSON file
+
 import Gallery from "@/components/gamePage/Gallery";
 import ScreenshotGallery from "@/components/gamePage/ScreenShotsGallery";
 const GamePage = () => {
+ 
     const {id} = useParams();
     console.log(id)
   const [game, setGame] = useState();
@@ -35,15 +35,28 @@ const GamePage = () => {
     }
     fetchGame();
 }, []);
-  if (!game) {
-    return (
-      <div className="min-h-screen bg-primary_ text-light_ flex items-center justify-center">
-    
-      <LottieAnimation animationData={bubblesAnimation} className="lottie-container" />
-      
-      </div>
-    )
-  }
+if (!game) {
+  return (
+    <div className="min-h-screen bg-primary_ text-light_ flex flex-col items-center justify-center">
+     
+
+ 
+    <div className="fixed top-0 left-0 w-full z-50">
+    <div className="h-1 w-full bg-gray-200 overflow-hidden">
+      <div 
+        className="h-full bg-accent_ animate-loading-bar" 
+        style={{
+          width: '30%',
+          animation: 'loading-bar 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite'
+        }}
+      ></div>
+    </div>
+  </div>
+  
+    </div>
+  )
+}
+  
 
 
    
@@ -74,7 +87,7 @@ const GamePage = () => {
                 <h3 className="text-muted_">Genre</h3>
                 <div className="flex flex-wrap gap-2 mt-1">
                   {game.data.genre.map(g => (
-                    <span key={g} className="px-2 py-1 bg-secondary_ rounded text-sm">
+                    <span onClick={() => window.location.href = `/search?query=all&genre=${g}`} key={g} className="px-2 py-1 bg-secondary_ rounded text-sm cursor-pointer">
                       {g}
                     </span>
                   ))}
@@ -84,7 +97,7 @@ const GamePage = () => {
                 <h3 className="text-muted_">Platform</h3>
                 <div className="flex flex-wrap gap-2 mt-1">
                   {game.data.operatingSystem.map(os => (
-                    <span key={os} className="px-2 py-1 bg-secondary_ rounded text-sm">
+                    <span onClick={() => window.location.href = `/search?query=all&operatingSystem=${os}`} key={os} className="px-2 py-1 cursor-pointer bg-secondary_ rounded text-sm">
                       {os}
                     </span>
                   ))}
@@ -92,7 +105,15 @@ const GamePage = () => {
               </div>
               <div>
                 <h3 className="text-muted_">Language</h3>
-                <p>{game.data.language}</p>
+                {     game.language.map((z) => (
+
+                    <span onClick={() => window.location.href = `/search?query=all&language=${z}`} key={z} className="px-2 py-1 cursor-pointer bg-secondary_ rounded text-sm">
+                    {z}</span>
+
+
+                ))
+                }
+                
               </div>
               <div>
                 <h3 className="text-muted_">Version</h3>

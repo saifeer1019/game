@@ -43,5 +43,8 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/test']
+  matcher: [
+    '/admin/:path*',  // Matches all paths under /admin
+    '/api/admin/:path*'  // Matches all paths under /api/admin
+  ]
 };

@@ -90,10 +90,22 @@ export default function Home() {
   
 if (loading) {
   return (
-    <div className="min-h-screen bg-primary_ text-light_ flex items-center justify-center">
+    <div className="min-h-screen bg-primary_ text-light_ flex flex-col items-center justify-center">
+     
+
+ 
+    <div className="fixed top-0 left-0 w-full z-50">
+    <div className="h-1 w-full bg-gray-200 overflow-hidden">
+      <div 
+        className="h-full bg-accent_ animate-loading-bar" 
+        style={{
+          width: '30%',
+          animation: 'loading-bar 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite'
+        }}
+      ></div>
+    </div>
+  </div>
   
-    <LottieAnimation animationData={bubblesAnimation} className="lottie-container" />
-    
     </div>
   )
 }
@@ -111,7 +123,7 @@ if (loading) {
           <div className="w-full hidden sm:block px-4 sm:px-0">
            <Carousel slides={games.featured} />
           </div>
-          <div className="w-full block sm:hidden  sm:px-0">
+          <div className="w-full block sm:hidden   sm:px-0">
           <CarouselMobile slides={games.featured} />
         </div>
 

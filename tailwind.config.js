@@ -10,6 +10,15 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		keyframes: {
+			'loading-bar': {
+			  '0%': { transform: 'translateX(-100%)' },
+			  '100%': { transform: 'translateX(300%)' },
+			}
+		},
+			animation: {
+        'loading-bar': 'loading-bar 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+      },
   		colors: {
 			primary_: '#111111', // Deep black for a gaming dark theme
 			secondary_: '#161618', // Slightly lighter dark gray for sections or containers
@@ -111,7 +120,9 @@ module.exports = {
   			'roboto-condensed': [
   				'var(--font-roboto-condensed)',
                     ...fontFamily.sans
-                ]
+                ],
+				'coolvetica': ['coolvetica', 'sans-serif'],
+				sans: ['coolvetica', 'ui-sans-serif', 'system-ui'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

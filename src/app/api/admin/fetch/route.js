@@ -45,6 +45,7 @@ export async function POST(request) {
   try {
     const { ids } = await request.json(); // Parse the request body to get ids array
     console.log(ids);
+    let count = 0
 
     for (const id of ids) {
       const response = await axios.get(`https://f95db-backend-1022000040343.asia-east1.run.app/api/fetchFull?id=${id}`, {
@@ -73,27 +74,26 @@ export async function POST(request) {
       
       // Usage in add game API
       const slug = generateSlug(gameName);
+      const languages = response.data.data?.language.split(', ');
+
 
 
       const searchFields = {
         searchableGameName: gameName.toLowerCase(), // For direct comparisons
         gameNameKeywords: generateKeywords(gameName), // For partial word matching
       };
-
-      // Add the document with all fields
-      await addDoc(gamesCollection, { 
-        ...response.data, 
-        ...searchFields,
-        slug: slug,
-        featured: false, 
-        trending: false, 
-        popular: false, 
-        views: 0 
-      });
-
+      const x = gameName.toLowerCase()
+      const y =  generateKeywords(gameName)
+    
       const tags = response.data.data?.tags || [];
       const developer = response.data.data?.developerName || '';
       const genres = response.data.data?.genre || [];
+      const os = response.data.data?.operatingSystem || [];
+     
+      const prefix = response.data.data?.prefix || [];
+      const category = response.data.data?.category || [];
+      const subcategory = response.data.data?.subCategory || [];
+
 
       // Add unique tags to the tags collection
       for (const tag of tags) {
@@ -120,10 +120,27 @@ export async function POST(request) {
           await addDoc(developersCollection, { name: developer });
           console.log(`Added new developer: ${developer}`);
         }
-        
+
+
+        const searchQueries = [x, category, subcategory, ...y,...developer, ...genres, ...tags, ...os, ...languages, ...prefix,   ]
+
+        // Add the document with all fields
+        await addDoc(gamesCollection, { 
+          ...response.data, 
+          ...searchFields,
+          slug: slug,
+          featured: false, 
+          trending: false, 
+          popular: false, 
+          views: 0,
+          languages: languages,
+          searchQueries: searchQueries  
+        });
+  
+        count ++
     }
       console.log("Games added successfully");
-    return NextResponse.json({ message: "Games added successfully" });
+    return NextResponse.json({ message: `${count} Games added successfully `, games: count},);
 
   } catch (error) {
     console.error("Error adding games:", error);
