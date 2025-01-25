@@ -73,9 +73,9 @@ export default function Trending({games}) {
                     style={{
                       whiteSpace: "nowrap",
                       overflow: "hidden",
-                      textOverflow: "ellipsis",
+                    
                     }}
-                    className="text-light_ text-lg font-semibold"
+                    className="text-light_ text-base font-semibold"
                   >
                     {game.data.gameName}
                   </h1>
