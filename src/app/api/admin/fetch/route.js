@@ -41,6 +41,7 @@ export async function POST(request) {
   const tagsCollection = collection(db, "tags");
   const developersCollection = collection(db, "developers");
   const genresCollection = collection(db, "genres");
+  const languageCollection = collection(db, 'languages')
 
   try {
     const { ids } = await request.json(); // Parse the request body to get ids array
@@ -112,6 +113,16 @@ export async function POST(request) {
           console.log(`Added new genre: ${genre}`);
         }
       }
+
+         // Add unique tags to the tags collection
+         for (const tag of languages) {
+          const tagExists = await checkIfExists(languageCollection, "name", tag);
+          if (!tagExists) {
+            await addDoc(languageCollection, { name: tag });
+            console.log(`Added new tag: ${tag}`);
+          }
+        }
+  
 
       // Add unique developers to the developers collection
      

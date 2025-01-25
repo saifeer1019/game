@@ -104,7 +104,7 @@ console.log(searchState)
                 return;
             }
 
-            const response = await axios.get('http://localhost:3000/api/search', {
+            const response = await axios.get('/api/search', {
                 params
             });
 
