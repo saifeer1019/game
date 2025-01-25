@@ -62,22 +62,31 @@ export default function Home() {
                       setGames(cachedGameData);
                       setLoading(false);
                     }
-                    else {
+                   
                       const response = await axios.get(`/api/games`, {
                         params: {
                                 limit: 5
                         },
                       
                 });
-                
-                setGames(response.data);
-                
-                setLoading(false);
-                // Storing game data
+                if (cachedGameData && cachedGameData != response.data){
 
-                storeWithExpiry('gameData', response.data, 24 * 60 * 60 * 1000);
+                  setGames(response.data);
+                
 
-                    }
+                }
+                if (!cachedGameData){
+                  setGames(response.data);
+                
+                  setLoading(false);
+                  // Storing game data
+  
+                  storeWithExpiry('gameData', response.data, 24 * 60 * 60 * 1000);
+  
+                  
+
+                }
+                 
                 
             } catch (error) {
                     console.error('Error:', error);

@@ -1,15 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/config/firebase";
-import { 
-  collection, 
-  getDocs,
-  getDoc,
-  doc, 
-  query, 
-  where, 
-  limit, 
-  startAfter,
-  orderBy
+import {   collection,   getDocs,  getDoc,  doc,   query,   where,   limit,   startAfter,  orderBy
 } from "firebase/firestore";
 
 export async function GET(request) {
@@ -74,9 +65,11 @@ export async function GET(request) {
     // Add sorting constraint based on sortOrder
     switch (sortOrder) {
       case "views":
-        queryConstraints.push(orderBy("views", "desc"));
+        console.log('views sorting')
+        queryConstraints.push(orderBy("views", "asc"));
         break;
       case "recentlyAdded":
+        console.log('recentlyAdded sorting')
         queryConstraints.push(orderBy("data.releaseDate", "desc"));
         break;
       case "rating":
