@@ -105,6 +105,7 @@ if (!game) {
               </div>
               <div>
                 <h3 className="text-muted_">Language</h3>
+                <div className="flex flex-wrap">
                 {     game.languages.map((z) => (
 
                     <span onClick={() => window.location.href = `/search?query=all&language=${z}`} key={z} className="px-2 py-1 cursor-pointer bg-secondary_ rounded text-sm">
@@ -113,7 +114,7 @@ if (!game) {
 
                 ))
                 }
-                
+                </div>
               </div>
               <div>
                 <h3 className="text-muted_">Version</h3>
@@ -136,7 +137,7 @@ if (!game) {
                 ))}
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-light_">{game.data.gameName}</h1>
-              <p className="text-muted_ text-lg">by {game.data.developerName}</p>
+              <a href={`/search?query=all&developer=${game.data.developerName}`} className="text-muted_ text-lg">by {game.data.developerName}</a>
             </div>
 
             <div className="flex gap-4 flex-wrap">

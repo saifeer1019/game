@@ -56,7 +56,7 @@ export default function Gallery({slice = 8, heading, games}) {
             </div>
 
             <div className="flex flex-col w-full bg-primary_ shadow-sm p-2">
-              <h2 className="bebas text-light_ text-lg sm:text-xl font-bold tracking-wide mt-1 truncate">
+              <h2 className="bebas text-light_ text-lg  font-bold tracking-wide mt-1 truncate">
                 {game.data.gameName}
               </h2>
 

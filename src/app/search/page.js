@@ -21,6 +21,8 @@ export default function SearchPage() {
         tag: '',
         developer: '',
         genre: '',
+        operatingSystem : '',
+        language:''
     });
     
     const [games, setGames] = useState([]);
@@ -37,6 +39,7 @@ export default function SearchPage() {
         developer: '',
         genre: '',
         tags: '',
+        language: ','
     });
     
     const [sortOrder, setSortOrder] = useState('');
@@ -50,13 +53,15 @@ export default function SearchPage() {
         const developer = urlParams.get('developer') || '';
         const genre = urlParams.get('genre') || '';
         const operatingSystem = urlParams.get('operatingSystem') || '';
+        const language = urlParams.get('language') || '';
 
         setSearchState({
             query,
             tag,
             developer,
             genre,
-            operatingSystem
+            operatingSystem,
+            language
         });
 
         // Update filters based on URL parameters
@@ -67,10 +72,10 @@ export default function SearchPage() {
             genre: genre || prev.genre,
         }));
     }, [window.location.search]); // Dependency on search string changes
-
+console.log(searchState)
     // Function to construct search parameters
     const constructSearchParams = (lastDocId = null) => {
-        const { query, tag, developer, genre } = searchState;
+        const { query, tag, developer, genre,  language } = searchState;
         return {
             query,
           
@@ -187,12 +192,13 @@ export default function SearchPage() {
 
 // Helper component for the search header
 const SearchHeader = ({ searchState }) => {
-    const { query, tag, developer, genre } = searchState;
+    const { query, tag, developer, genre, operatingSystem, language } = searchState;
     
     if (query && !tag && !genre && !developer && !operatingSystem) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for: {query}</h1>;
     if (tag) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Tag: {tag}</h1>;
     if (genre) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Genre: {genre}</h1>;
     if (developer) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Developer: {developer}</h1>;
-    if (operatingSystem) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Operating System: {developer}</h1>;
+    if (operatingSystem) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Search Results for Operating System: {operatingSystem}</h1>;
+    if (language) return <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">Games in {language}</h1>;
     return null;
 };

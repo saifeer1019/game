@@ -54,7 +54,7 @@ export default function Trending({games}) {
             >
             
               <div className="bg-secondary_ rounded-lg overflow-hidden shadow-lg items-center">
-                <div className="relative aspect-[3/4] sm:h-[35vh] mx-auto">
+                <div className="relative aspect-[3/4] sm:h-[38vh] mx-auto">
                   <Image
                     src={game.data.bannerURL}
                     placeholder="blur"
