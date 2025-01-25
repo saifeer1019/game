@@ -133,12 +133,12 @@ export async function POST(request) {
         }
 
 
-        const searchQueries = [x, category, subcategory, ...y,...developer, ...genres, ...tags, ...os, ...languages, ...prefix,   ]
+        const searchQueries = [x, category, subcategory, ...y, developer, ...genres, ...tags, ...os, ...languages, ...prefix,   ]
 
         // Add the document with all fields
         await addDoc(gamesCollection, { 
           ...response.data, 
-          ...searchFields,
+          
           slug: slug,
           featured: false, 
           trending: false, 
