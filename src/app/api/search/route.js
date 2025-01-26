@@ -66,7 +66,7 @@ export async function GET(request) {
     switch (sortOrder) {
       case "views":
         console.log('views sorting')
-        queryConstraints.push(orderBy("views", "asc"));
+        queryConstraints.push(orderBy("views", "desc"));
         break;
       case "recentlyAdded":
         console.log('recentlyAdded sorting')

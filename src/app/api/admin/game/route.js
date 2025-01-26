@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/config/firebase";
-import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 
 export async function PUT(request) {
   try {
@@ -33,5 +33,41 @@ export async function PUT(request) {
   } catch (error) {
     console.error("Error updating game:", error);
     return NextResponse.json({ error: "Failed to update game" }, { status: 500 });
+  }
+}
+
+
+export async function DELETE(request) {
+  try {
+    // Parse the request body
+ 
+    const body = await request.json();
+
+    // Extract the custom game ID
+    const { id } = body;
+
+    if (!id) {
+      return NextResponse.json({ error: "Game ID is required" }, { status: 400 });
+    }
+
+    // Query the collection to find the document with the matching custom ID
+    const gamesCollectionRef = collection(db, "games");
+    const gameQuery = query(gamesCollectionRef, where("id", "==", id));
+    const querySnapshot = await getDocs(gameQuery);
+
+    if (querySnapshot.empty) {
+      return NextResponse.json({ error: "Game not found" }, { status: 404 });
+    }
+
+    // Get the document reference for the matching game
+    const gameDocRef = querySnapshot.docs[0].ref;
+
+    // Delete the game document
+    await deleteDoc(gameDocRef);
+
+    return NextResponse.json({ message: "Game deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting game:", error);
+    return NextResponse.json({ error: "Failed to delete game" }, { status: 500 });
   }
 }

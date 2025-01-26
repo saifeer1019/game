@@ -14,6 +14,7 @@ export default function GameList({ games, setGames, lastDocId }) {
         ));
     };
    
+    
     const handleSave = async () => {
         try {
             await Promise.all(
@@ -33,6 +34,17 @@ export default function GameList({ games, setGames, lastDocId }) {
             alert('Failed to save changes: ' + error.message);
         }
     };
+
+    const handleZ = async (id) => {
+        try {
+            await axios.delete(`/api/admin/game`, { data: { id: id } });
+            alert('Deleted successfully');
+            setChanged(false);
+        } catch (error) {
+            console.error('Error saving changes:', error);
+            alert('Failed to save changes: ' + error.message);
+        }
+    }
 
     return (
         <div className="flex flex-col gap-4 p-6 bg-[#111111] min-h-screen">
@@ -106,7 +118,7 @@ export default function GameList({ games, setGames, lastDocId }) {
                         <div>
                             <button
                                 className="flex items-center space-x-2 px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 transition-colors"
-                                onClick={() => handleSave(game.id)}
+                                onClick={() => handleZ(game.id)}
                             >
                                 <Trash2 size={16} />
                                 <span>Delete</span>
