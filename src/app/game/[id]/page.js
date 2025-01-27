@@ -13,7 +13,7 @@ import Footer from '@/components/Footer';
 import Gallery from "@/components/gamePage/Gallery";
 import ScreenshotGallery from "@/components/gamePage/ScreenShotsGallery";
 const GamePage = () => {
- 
+  const baseurl = process.env.NEXT_PUBLIC_BASEURL
     const {id} = useParams();
     console.log(id)
   const [game, setGame] = useState();
