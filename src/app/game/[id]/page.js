@@ -157,10 +157,14 @@ if (!game) {
 
             <div className="flex gap-4">
               <button className="px-6 py-2 bg-accent_ hover:bg-hover_ transition-colors rounded-md flex items-center gap-2">
-                <Download className="w-5 h-5" />
+                <Download
+                onClick={() => window.location.href = `${game.links.link[0].link}`}
+                 className="w-5 h-5" />
                 Download
               </button>
-              <button className="px-6 py-2 border border-accent_ text-accent_ hover:bg-accent_/10 transition-colors rounded-md flex items-center gap-2">
+              <button
+              onClick={() => window.location.href = `https://www.facebook.com/sharer/sharer.php?u=${baseurl}/game/${game.slug}`}
+              className="px-6 py-2 border border-accent_ text-accent_ hover:bg-accent_/10 transition-colors rounded-md flex items-center gap-2">
                 <Share2 className="w-5 h-5" />
                 Share
               </button>
@@ -209,7 +213,9 @@ if (!game) {
                         className="flex items-center justify-between p-4 bg-secondary_ rounded-lg hover:bg-accent_/10 transition-colors"
                       >
                         <div className="flex items-center gap-4">
-                          <Download className="w-5 h-5 text-accent_" />
+                          <Download
+                         
+                          className="w-5 h-5 text-accent_" />
                           <span>{link.name}</span>
                         </div>
                         <ChevronRight className="w-5 h-5 text-accent_" />

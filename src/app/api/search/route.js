@@ -24,14 +24,14 @@ export async function GET(request) {
   const pageSize = parseInt(url.searchParams.get("limit")) || 12;
   const operatingSystem = url.searchParams.get("operatingSystem") || "";
   const rating = url.searchParams.get("rating") || "";
-  const genre = (url.searchParams.get("genre") || "").toLowerCase();
-  const tags = (url.searchParams.get("tags") || "").toLowerCase();
-  const developer = (url.searchParams.get("developer") || "").toLowerCase();
+  const genre = (url.searchParams.get("genre") || "");
+  const tags = (url.searchParams.get("tags") || "");
+  const developer = (url.searchParams.get("developer") || "")
   const sortOrder = url.searchParams.get("sortOrder") || "";
   const category = url.searchParams.get("category") || "";
   const subcategory = url.searchParams.get("subcategory") || "";
   const prefix = url.searchParams.get("prefix") || "";
-  const language = url.searchParams.get("language") || "";
+  const language = url.searchParams.get("language")|| "";
 
   if (searchQuery === "all") {
     searchQuery = "";
@@ -47,7 +47,7 @@ export async function GET(request) {
     // Add non-empty search parameters to searchKeys
     [searchQuery, tags, developer, genre, operatingSystem, category, subcategory, prefix, language  ]
       .filter(param => param !== "")
-      .forEach(param => searchKeys.push(param.toLowerCase()));
+      .forEach(param => searchKeys.push(param));
 
     console.log("Prepared Search Keys:", searchKeys);
 
