@@ -72,7 +72,7 @@ export default function Home() {
                 if (cachedGameData && cachedGameData != response.data){
 
                   setGames(response.data);
-                
+                  storeWithExpiry('gameData', response.data, 24 * 60 * 60 * 1000);
 
                 }
                 if (!cachedGameData){
