@@ -59,7 +59,14 @@ export async function POST(request) {
         console.log(`Game with id ${id} does not exist`);
         continue;
       }
+      const genres = response.data.data?.genre || [];
+      const tags = response.data.data?.tags || [];
       
+      if (tags.includes('rape') || tags.includes('loli') || genres.includes('rape') || genres.includes('loli') || genres.includes('groping') || (tags.includes('groping'))   ) {
+        console.log(`Game with id ${id} does not exist`);
+        continue;
+      }
+
 
       // Generate search-related fields
       const gameName = response.data.data?.gameName || '';
@@ -86,9 +93,9 @@ export async function POST(request) {
       const x = gameName.toLowerCase()
       const y =  generateKeywords(gameName)
     
-      const tags = response.data.data?.tags || [];
+      
       const developer = response.data.data?.developerName || '';
-      const genres = response.data.data?.genre || [];
+
       const os = response.data.data?.operatingSystem || [];
      
       const prefix = response.data.data?.prefix || [];
