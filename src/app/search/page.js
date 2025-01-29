@@ -86,8 +86,9 @@ console.log(searchState)
             genre: filters.genre || genre, // Prioritize filter selection
             tags: filters.tags || tag, // Prioritize filter selection
             sortOrder,
-            limit: 100,
+            limit: 20,
             lastDocId,
+            language
         };
     };
 

@@ -30,16 +30,18 @@ export default function AdminPage() {
     try {
       const response = await axios.get(`/api/search`, {
         params: {
-          query: 'all',
+          query,
+          
           operatingSystem: filters.operatingSystems,
           releaseYear: filters.releaseYear,
           rating: filters.ratings,
-          developer: filters.developer,
-          genre: filters.genre,
-          tags: filters.tags,
+          developer: filters.developer || developer, // Prioritize filter selection
+          genre: filters.genre || genre, // Prioritize filter selection
+          tags: filters.tags || tag, // Prioritize filter selection
+          language:
           sortOrder,
-          limit: 12,
-          lastDocId: lastDocId,
+          limit: 100,
+          lastDocId,
         }
       });
 
